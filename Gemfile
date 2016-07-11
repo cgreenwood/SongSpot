@@ -6,6 +6,16 @@ gem 'rails', '~> 5.0.0'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 gem 'jquery-turbolinks'
+#Rest-Client and dependencies
+gem 'rest-client', '~> 1.8'
+gem 'http-cookie', '~> 1.0', '>= 1.0.2'
+gem 'mime-types', '2.99.2'
+gem 'netrc', '~> 0.11.0'
+
+#Spotiy Client for ruby
+gem 'rspotify'
+
+
 # Use Bootstrap
 gem 'bootstrap-sass'
 #For password encryption (Hash function)
@@ -34,7 +44,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'devise_zxcvbn'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

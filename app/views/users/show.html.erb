@@ -1,8 +1,11 @@
 <% provide(:title, "My Profile") %>
 <div class="center jumbotron">
   <h1>Welcome to your profile page</h1>
-    <p>Hello <%= current_user.name %></p>
+    <p>Hello ,<%= current_user.name.split(" ", ).first %></p>
 
 
 
   <%= link_to("Edit",edit_user_registration_path) %>
+
+<p>Link your spotify account below (WIP):</p>
+  <%= link_to 'Sign in with Spotify', '/auth/spotify' %>
