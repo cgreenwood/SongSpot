@@ -18,10 +18,8 @@ class Playlist
                                      {"Authorization" => "Bearer #{token}"}
 
     recommendations = JSON.parse(response)
-    Rails.logger.debug(recommendations["tracks"].first["id"])
+    #Rails.logger.debug(recommendations["tracks"].first["albums"]["images"].first["url"])
 
-  # {"seed_tracks" => params[:seed_id_1],params[:seed_id_2],params[:seed_id_3]
-  #  params[:seed_id_4],params[:seed_id_5]}
   end
 
   def self.authorize
