@@ -1,6 +1,10 @@
 class ArticlesController < ApplicationController
   def new
-    @article = Article.new
+    if current_user && current_user.admin?
+      @article = Article.new
+    else
+      redirect_to root_path
+    end
   end
 
   def index
@@ -14,6 +18,7 @@ class ArticlesController < ApplicationController
   def create
     if current_user && current_user.admin?
       @article = Article.new(article_params)
+      @article.user = current_user
       if @article.save
         redirect_to root_path
       else
@@ -38,7 +43,11 @@ class ArticlesController < ApplicationController
 end
 
   def edit
-    @article = Article.find(params[:id])
+    if current_user && current_user.admin?
+      @article = Article.find(params[:id])
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy

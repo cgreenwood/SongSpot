@@ -8,6 +8,41 @@
   <%= @article.text %>
 </p>
 
+<small>Created by <%= @article.user.name %> at <%= @article.created_at %>
+</small>
+
+<h2>Comments</h2>
+<% @article.comments.each do |comment| %>
+<div class=container >
+  <p>
+    <strong><%= comment.user.name %></strong>
+  </p>
+
+  <p>
+    <%= comment.body %>
+  </p>
+
+</div>
+
+  <div>
+  <small>Created at <%= comment.created_at %>
+  </small>
+  </div>
+  <p>==============================================</p>
+<% end %>
+<% if current_user %>
+<h2>Add a comment:</h2>
+<%= form_for([@article, @article.comments.build]) do |f| %>
+
+  <p>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+<% end %>
+
 <% if current_user && current_user.admin? %>
 <%= link_to 'Edit', edit_article_path(@article) %>
 
