@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {registrations: 'registrations'}
   resources :users, only: [:show]
+  resources :playlists
   resources :articles do
     resources :comments
   end
@@ -13,6 +14,5 @@ Rails.application.routes.draw do
   get  '/about',   to: 'pages#about'
   get  '/contact', to: 'pages#contact'
   get  '/help',    to: 'pages#help'
-  get '/auth/spotify/callback', to: 'users#spotify'
 
 end

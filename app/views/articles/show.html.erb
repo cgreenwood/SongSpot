@@ -44,10 +44,13 @@
 <% end %>
 
 <% if current_user && current_user.admin? %>
+<button type="button" class="btn btn-primary">
 <%= link_to 'Edit', edit_article_path(@article) %>
+</button>
 
-
+<button type="button" class="btn btn-primary">
 <%= link_to 'Destroy', article_path(@article),
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
+            </button>
 <% end %>

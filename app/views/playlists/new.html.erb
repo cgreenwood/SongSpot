@@ -1,0 +1,33 @@
+
+<%= form_tag(playlists_path) do |f| %>
+
+<div class=container>
+  <%= label_tag(:limit,"Number of tracks:") %>
+  <%= number_field_tag(:limit) %>
+</div>
+
+<div class=container>
+  <%= label_tag(:min_pop,"Minimum popularity:") %>
+  <%= number_field_tag(:min_pop) %>
+</div>
+
+<%= hidden_field_tag(:market,"GB") %>
+
+
+<div class=container>
+  <%=label_tag(:seed_id_1,"Seed 1") %>
+  <%=text_field_tag(:seed_id_1) %>
+  <%=label_tag(:seed_id_2,"Seed 2") %>
+  <%=text_field_tag(:seed_id_2) %>
+  <%=label_tag(:seed_id_3,"Seed 3") %>
+  <%=text_field_tag(:seed_id_3) %>
+  <%=label_tag(:seed_id_4,"Seed 4") %>
+  <%=text_field_tag(:seed_id_4) %>
+  <%=label_tag(:seed_id_5,"Seed 5") %>
+  <%=text_field_tag(:seed_id_5) %>
+</div>
+
+<div class=container>
+  <%=submit_tag 'Submit' %>
+</div>
+<%end%>
