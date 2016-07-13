@@ -9,9 +9,12 @@ class Playlist
     # Rails.logger.debug(params[:seed_id_3])
     # Rails.logger.debug(params[:seed_id_4])
     # Rails.logger.debug(params[:seed_id_5])
-    a = [params[:seed_id_1], params[:seed_id_2],
-         params[:seed_id_3], params[:seed_id_4],
-         params[:seed_id_5]]
+    a = [params[:seed_id_1].split(":").third,
+         params[:seed_id_2].split(":").third,
+         params[:seed_id_3].split(":").third,
+         params[:seed_id_4].split(":").third,
+         params[:seed_id_5].split(":").third]
+         
     seeds = a.select { |e| e.present? }.join(",")
     token = authorize
     response = RestClient.get "https://api.spotify.com/v1/recommendations?limit=#{params[:limit]}&market=#{params[:market]}&min_popularity=#{params[:min_pop]}&seed_tracks=#{seeds}",

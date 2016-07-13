@@ -7,7 +7,7 @@
   </h2>
   <div class=container>
 
-  <div class=col-md-6>
+  <div class=col-md-7>
     <table class="table">
     <thead>
       <tr>
@@ -15,15 +15,17 @@
         <th>Song Name</th>
         <th>Artist</th>
         <th>Album</th>
+        <th>Popularity</th>
       </tr>
     </thead>
     <tbody>
       <% @recommendations["tracks"].each do |e| %>
       <tr>
-        <td><img src=<%= e["album"]["images"].third["url"] %> at="rss feed"/></td> <!-- FIX -->
+        <td><img src=<%= e["album"]["images"].third["url"] %> alt="rss feed"/></td> <!-- FIX -->
         <td><%= e["name"] %></td>
         <td><%= e["artists"].first["name"] %></td>   <!--FIX -->
         <td><%= e["album"]["name"] %></td>
+        <td><%= e["popularity"] %>/100</td>
       </tr>
         <% end %>
     </tbody>
@@ -31,7 +33,7 @@
 
   </div>
 
-  <div class=col-md-6 pull-left>
+  <div class=col-md-3 pull-left>
     <iframe src="https://embed.spotify.com/?uri=spotify:trackset:<%= @tracks %>&theme=white&view=coverart" frameborder="0" allowtransparency="true" width="600" height="400" frameborder="0" allowtransparency="true"></iframe>
     <!-- <iframe src="https://embed.spotify.com/follow/1/?uri=spotify:artist:1vCWHaC5f2uS3yhpwWbIA6&size=detail&theme=light" width="300" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe> -->
   </div>
