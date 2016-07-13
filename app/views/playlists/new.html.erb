@@ -1,29 +1,45 @@
 
-<%= form_tag(playlists_path) do |f| %>
+<%= form_tag(display_playlist_path) do |f| %>
 
 <div class=container>
   <%= label_tag(:limit,"Number of tracks:") %>
-  <%= number_field_tag(:limit) %>
+  <p>Number between 1 and 100</p>
+  <small>Default of 20 if none entered.</small>
+  <%= number_field_tag(:limit, options = {:min => 1,:max => 100}) %>
+
 </div>
 
 <div class=container>
   <%= label_tag(:min_pop,"Minimum popularity:") %>
-  <%= number_field_tag(:min_pop) %>
+  <p>Number between 1 and 100 where 100 is most popular.</p>
+    <small>Default of 50 if none entered.</small>
+  <%= number_field_tag(:min_pop, options = {:min => 1, :max => 100}) %>
 </div>
 
 <%= hidden_field_tag(:market,"GB") %>
 
 
 <div class=container>
-  <%=label_tag(:seed_id_1,"Seed 1") %>
+  <p>Copy Song URI:</p>
+  <small>At least one of these is required.</small>
+  <small>If none entered default will be "Rick Astley - Never Gonna Give You Up"
+  <ol>
+    <li>Open Spotify</li>
+    <li>Right click on a song</li>
+    <li>Click on "Copy Spotify URI"</li>
+  </ol>
+
+</div>
+  <div>
+  <%=label_tag(:seed_id_1,"Song 1") %>
   <%=text_field_tag(:seed_id_1) %>
-  <%=label_tag(:seed_id_2,"Seed 2") %>
+  <%=label_tag(:seed_id_2,"Song 2") %>
   <%=text_field_tag(:seed_id_2) %>
-  <%=label_tag(:seed_id_3,"Seed 3") %>
+  <%=label_tag(:seed_id_3,"Song 3") %>
   <%=text_field_tag(:seed_id_3) %>
-  <%=label_tag(:seed_id_4,"Seed 4") %>
+  <%=label_tag(:seed_id_4,"Song 4") %>
   <%=text_field_tag(:seed_id_4) %>
-  <%=label_tag(:seed_id_5,"Seed 5") %>
+  <%=label_tag(:seed_id_5,"Song 5") %>
   <%=text_field_tag(:seed_id_5) %>
 </div>
 

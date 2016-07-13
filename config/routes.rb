@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {registrations: 'registrations'}
   resources :users, only: [:show]
   resources :playlists
+  post 'playlists/display' => 'playlists#display', as: :display_playlist
   resources :articles do
     resources :comments
   end
