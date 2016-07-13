@@ -18,6 +18,7 @@ class Playlist
                                      {"Authorization" => "Bearer #{token}"}
 
     recommendations = JSON.parse(response)
+    return recommendations
     #Rails.logger.debug(recommendations["tracks"].first["albums"]["images"].first["url"])
 
   end
@@ -30,6 +31,16 @@ class Playlist
                                {"Authorization" => "Basic #{base64}"}
     data = JSON.parse(response)
     token = data["access_token"]
+  end
+
+  def self.extract_tracks(recommendations)
+    tracks = []
+    recommendations["tracks"].each do |e|
+      tracks << e["id"]
+    end
+    tracks = tracks.join(",")
+    Rails.logger.debug(tracks)
+    return tracks
   end
 
 end

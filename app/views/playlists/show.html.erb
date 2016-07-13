@@ -1,0 +1,43 @@
+<% provide(:title, "My Recommendations") %>
+<div class="center jumbotron">
+  <h1>SongSpot - Playlist</h1>
+
+  <h2>
+    Spotify Recommends...
+  </h2>
+  <div class=container>
+
+  <div class=col-md-6>
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Cover</th>
+        <th>Song Name</th>
+        <th>Artist</th>
+        <th>Album</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @recommendations["tracks"].each do |e| %>
+      <tr>
+        <td><img src=<%= e["album"]["images"].third["url"] %> at="rss feed"/></td> <!-- FIX -->
+        <td><%= e["name"] %></td>
+        <td><%= e["artists"].first["name"] %></td>   <!--FIX -->
+        <td><%= e["album"]["name"] %></td>
+      </tr>
+        <% end %>
+    </tbody>
+  </table>
+
+  </div>
+
+  <div class=col-md-6 pull-left>
+    <iframe src="https://embed.spotify.com/?uri=spotify:trackset:<%= @tracks %>&theme=white&view=coverart" frameborder="0" allowtransparency="true" width="600" height="400" frameborder="0" allowtransparency="true"></iframe>
+    <!-- <iframe src="https://embed.spotify.com/follow/1/?uri=spotify:artist:1vCWHaC5f2uS3yhpwWbIA6&size=detail&theme=light" width="300" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe> -->
+  </div>
+
+
+</div>
+</div>
+
+<!-- PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe -->
