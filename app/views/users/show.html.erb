@@ -1,7 +1,7 @@
 <% provide(:title, "My Profile") %>
 <div class="center jumbotron">
-  <h1>Welcome to your profile page</h1>
-    <p>Hello ,<%= @user.name.split(" ", ).first %></p>
+  <h1>My Profile</h1>
+    <p class="pull-left">Hello ,<%= @user.name.split(" ", ).first %></p>
 
 
 <div>
@@ -9,6 +9,34 @@
   <%= link_to("Edit",edit_user_registration_path) %>
 </button>
 </div>
+
+<div>
+  <h2 class="pull-left">
+    Your Favourites
+  </h2>
+  <table class="table">
+  <thead>
+    <tr>
+      <th>Cover</th>
+      <th>Song Name</th>
+      <th>Artist</th>
+      <th>Album</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.favourites.each do |e| %>
+    <tr>
+      <td><img src=<%=e["album_art"] %></td>
+      <td><%= e["track_name"] %></td>
+      <td><%= e["artist_name"] %></td>
+      <td><%= e["album_name"] %></td>
+      <td><button type="button" class="btn btn-primary btn-add">X</button></td>
+    </tr>
+      <% end %>
+  </tbody>
+</table>
+
 <div>
 
 <p>Link your spotify account below (WIP):</p>

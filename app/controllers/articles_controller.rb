@@ -1,3 +1,4 @@
+# Article controller used for viewing,editing,deleting and creating articles.
 class ArticlesController < ApplicationController
   def new
     if current_user && current_user.admin?
@@ -31,16 +32,16 @@ class ArticlesController < ApplicationController
 
   def update
     if current_user && current_user.admin?
-    @article = Article.find(params[:id])
-    if article.update(article_params)
-      redirect_to root_path
+      @article = Article.find(params[:id])
+      if article.update(article_params)
+        redirect_to root_path
+      else
+        render 'edit'
+      end
     else
-      render 'edit'
+      redirect_to root_path
     end
-  else
-    redirect_to root_path
   end
-end
 
   def edit
     if current_user && current_user.admin?
@@ -55,12 +56,11 @@ end
       @article = Article.find(params[:id])
       @article.destroy
       redirect_to root_path
-    else
-      redirect_to root_path
     end
   end
 
   private
+
   def article_params
     params.require(:article).permit(:title, :text)
   end

@@ -1,0 +1,40 @@
+<% if current_user && current_user.admin? %>
+<% provide(:title, 'Article - New') %>
+<h1>Edit Article</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for :article, url: articles_path do |f| %>
+
+    <% if @article.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@article.errors.count, "error") %> prohibited
+            this article from being saved:
+          </h2>
+          <ul>
+            <% @article.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title%>
+    </div>
+
+    <div class="field">
+      <%= f.label :text %><br />
+      <%= f.text_area :text%>
+    </div>
+
+
+    <%= f.submit "Update", class: 'btn btn-primary' %>
+    <% end %>
+
+
+  </div>
+</div>
+<% end %>

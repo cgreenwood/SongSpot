@@ -1,11 +1,11 @@
+# Application helper - Provides a page a full title.
 module ApplicationHelper
-
   def full_title(page_title = '')
-    base_title = "SongSpot"
+    base_title = 'SongSpot'
     if page_title.empty?
       base_title
     else
-      page_title + " | " + base_title
+      page_title + ' | ' + base_title
     end
   end
 end

@@ -9,7 +9,7 @@
 
 </div>
 
-<div class=container>
+<div>
   <%= label_tag(:min_pop,"Minimum popularity:") %>
   <p>Number between 1 and 100 where 100 is most popular.</p>
     <small>Default of 50 if none entered.</small>
@@ -19,7 +19,7 @@
 <%= hidden_field_tag(:market,"GB") %>
 
 
-<div class=container>
+<div>
   <p>Copy Song URI:</p>
   <small>At least one of these is required.</small>
   <small>If none entered default will be "Rick Astley - Never Gonna Give You Up"
@@ -43,7 +43,7 @@
   <%=text_field_tag(:seed_id_5) %>
 </div>
 
-<div class=container>
+<div>
   <%=submit_tag 'Submit' %>
 </div>
 <%end%>

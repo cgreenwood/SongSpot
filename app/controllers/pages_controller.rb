@@ -1,3 +1,4 @@
+# Pages controller for displaying the basic pages (home,about,contact,help)
 class PagesController < ApplicationController
   def home
     @articles = Article.all
