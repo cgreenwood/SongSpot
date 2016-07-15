@@ -1,19 +1,19 @@
-<% if current_user && current_user.admin? %>
-<% provide(:title, 'Article - New') %>
-<h1>Edit Article</h1>
+<% if current_user && (current_user.id == @bug.user_id || current_user.admin?)%>
+<% provide(:title, 'Bug - New') %>
+<h1>Edit the bug</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for :article, url: articles_path do |f| %>
+    <%= form_for :bug, url: bugs_path do |f| %>
 
-    <% if @article.errors.any? %>
+    <% if @bug.errors.any? %>
         <div id="error_explanation">
           <h2>
-            <%= pluralize(@article.errors.count, "error") %> prohibited
-            this article from being saved:
+            <%= pluralize(@bug.errors.count, "error") %> prohibited
+            this bug from being saved:
           </h2>
           <ul>
-            <% @article.errors.full_messages.each do |msg| %>
+            <% @bug.errors.full_messages.each do |msg| %>
               <li><%= msg %></li>
             <% end %>
           </ul>
@@ -25,9 +25,26 @@
       <%= f.text_field :title%>
     </div>
 
+    <% if current_user.admin? %>
     <div class="field">
-      <%= f.label :text %><br />
-      <%= f.text_area :text%>
+      <%= f.label :bug_status %><br />
+      <%= f.select(:bug_type,["Pending","Resolved","Unsolved"]) %>
+      </div>
+      <% end %>
+
+    <div class="field">
+      <%= f.label :type %><br />
+      <p>
+      <%= f.select(:bug_type, ["Playlist creation","User registration","Site navigation",
+                           "Report a bug"])%>
+    </div>
+
+
+
+
+    <div class="field">
+      <%= f.label :content %><br />
+      <%= f.text_area :content%>
     </div>
 
 

@@ -1,4 +1,4 @@
-<% if current_user && current_user.admin? %>
+<% if current_user%>
 <% provide(:title, 'Bug - New') %>
 <h1>Report a bug</h1>
 
@@ -28,7 +28,7 @@
     <div class="field">
       <%= f.label :type %><br />
       <p>
-      <%= f.select(:type, ["Playlist creation","User registration","Site navigation",
+      <%= f.select(:bug_type, ["Playlist creation","User registration","Site navigation",
                            "Report a bug"])%>
     </div>
 

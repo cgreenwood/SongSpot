@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :comments
   has_many :articles
+  has_many :bugs
   serialize :favourites, Array
 
   def link_spotify
