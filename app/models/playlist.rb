@@ -46,6 +46,17 @@ class Playlist
     tracks
   end
 
+  def self.get_spotify_access_token(user_refresh_token)
+    base64 = Base64.urlsafe_encode64(ENV['SPOTIFY_CLIENT_ID'] + ':' +
+                                     ENV['SPOTIFY_SECRET_ID'])
+    response = RestClient.post 'https://accounts.spotify.com/api/token',
+                                      { 'grant_type' => 'refresh_token',
+                                'refresh_token' => user_refresh_token },
+                                    'Authorization' => "Basic #{base64}"
+    data = JSON.parse(response)
+    data['access_token']
+  end
+
   def self.track_to_favourite(track)
     favourite = {}
     favourite['track_id'] = track['id']

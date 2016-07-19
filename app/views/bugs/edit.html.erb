@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for :bug, url: bugs_path do |f| %>
+    <%= form_for :bug, url: bug_path(@bug), method: :patch do |f| %>
 
     <% if @bug.errors.any? %>
         <div id="error_explanation">
@@ -28,7 +28,7 @@
     <% if current_user.admin? %>
     <div class="field">
       <%= f.label :bug_status %><br />
-      <%= f.select(:bug_type,["Pending","Resolved","Unsolved"]) %>
+      <%= f.select(:bug_status,["Pending","Resolved","Unsolved"]) %>
       </div>
       <% end %>
 

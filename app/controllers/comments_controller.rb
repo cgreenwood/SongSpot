@@ -7,7 +7,15 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to article_path(@article)
     else
-      render 'new', error: 'Failed to save.'
+      redirect_to article_path(@article), error: 'Failed to save.'
+    end
+  end
+
+  def destroy
+    if current_user && current_user.admin?
+      @comment = Comment.find(params[:id])
+      @comment.destroy
+      redirect_to article_path(@article)
     end
   end
 

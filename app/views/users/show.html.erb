@@ -1,18 +1,15 @@
 <% provide(:title, "My Profile") %>
 <div class="center jumbotron">
   <h1>My Profile</h1>
-    <p class="pull-left">Hello ,<%= @user.name.split(" ", ).first %></p>
-
-
-<div>
-<button type="button" class="btn btn-primary">
+    <p class="pull-left">Hello ,<%= @user.name.split(" ", ).first %>    </p>
+    <button type="button" class="btn btn-primary pull-left">
   <%= link_to("Edit",edit_user_registration_path) %>
 </button>
 </div>
-
+<% if current_user && current_user.spotify_refresh_token? %>
 <div>
-  <h2 class="pull-left">
-    Your Favourites
+  <h2>
+    Your Most recently added tracks
   </h2>
   <table class="table">
   <thead>
@@ -25,22 +22,27 @@
     </tr>
   </thead>
   <tbody>
-    <% @user.favourites.each do |e| %>
+    <% @favourites['items'].each do |e| %>
     <tr>
-      <td><img src=<%=e["album_art"] %></td>
-      <td><%= e["track_name"] %></td>
-      <td><%= e["artist_name"] %></td>
-      <td><%= e["album_name"] %></td>
+      <td><img src=<%=e['track']['album']["images"].third['url']%> alt="rss feed"/></td>
+      <td><%= e['track']["name"] %></td>
+      <td><%= e['track']['artists'].first['name'] %></td>
+      <td><%= e['track']['album']["name"] %></td>
       <td><button type="button" class="btn btn-primary btn-add">X</button></td>
     </tr>
       <% end %>
   </tbody>
 </table>
+<% else %>
+<h2>Please link your account to Spotify using the button below to see favourite tracks</h2>
+<% end %>
+<% if current_user && current_user.spotify_refresh_token? %>
 
+<% else %>
 <div>
-
 <p>Link your spotify account below (WIP):</p>
 <button type="button" class="btn btn-primary">
-  <%= link_to 'Sign in with Spotify', '#' %>
+  <%= link_to 'Sign in with Spotify',link_spotify_user_path(@user), method: :post  %>
 </button>
 </div>
+<% end %>

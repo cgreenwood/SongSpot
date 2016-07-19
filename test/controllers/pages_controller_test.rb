@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class PagesControllerTest < ActionDispatch::IntegrationTest
-
   def setup
     @base_title = "SongSpot"
   end

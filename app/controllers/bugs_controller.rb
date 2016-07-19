@@ -25,18 +25,10 @@ class BugsController < ApplicationController
     end
   end
 
-  def edit
-    if current_user
-      @bug = Bug.find(params[:id])
-    else
-      redirect_to bugs_path
-    end
-  end
-
   def update
-    if current_user
+    if current_user && current_user.admin?
       @bug = Bug.find(params[:id])
-      if bug.update(bug_params)
+      if @bug.update(bug_params)
         redirect_to bugs_path
       else
         render 'edit'
@@ -44,6 +36,15 @@ class BugsController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+  def edit
+    if current_user && current_user.admin?
+      @bug = Bug.find(params[:id])
+        render 'edit'
+      else
+        redirect_to root_path
+      end
   end
 
   def destroy
@@ -55,6 +56,6 @@ class BugsController < ApplicationController
   private
 
   def bug_params
-    params.require(:bug).permit(:title, :bug_type, :content)
+    params.require(:bug).permit(:title, :bug_type, :content, :bug_status)
   end
 end

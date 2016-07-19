@@ -18,7 +18,9 @@
 
 <%= hidden_field_tag(:market,"GB") %>
 
+<% if current_user && current_user.spotify_refresh_token? %>
 
+<% else %>
 <div>
   <p>Copy Song URI:</p>
   <small>At least one of these is required.</small>
@@ -42,8 +44,11 @@
   <%=label_tag(:seed_id_5,"Song 5") %>
   <%=text_field_tag(:seed_id_5) %>
 </div>
+<% end %>
 
 <div>
   <%=submit_tag 'Submit' %>
 </div>
+
+<p><%= @favourites %></p>
 <%end%>

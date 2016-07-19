@@ -10,9 +10,24 @@
 }
 
 /* universal */
+.bug_post {
+  display: inline-block;
+  margin: 1em;
+  width: 35em;
+  padding: 1em
+}
+
 
 .Pending {
   background-color: #e3e34e;
+}
+
+.Resolved {
+  background-color: #28c928
+}
+
+.Unsolved {
+  background-color: #bd0e0e
 }
 
 body {

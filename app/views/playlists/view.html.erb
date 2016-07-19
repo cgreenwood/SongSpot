@@ -27,7 +27,7 @@
         <td><%= e["artists"].first["name"] %></td>
         <td><%= e["album"]["name"] %></td>
         <td><%= e["popularity"] %>/100</td>
-        <td><button type="button" class="btn btn-primary btn-add">Add to favourites
+        <td><button type="button" class="btn btn-primary btn-add">+
 
           <% current_user.favourites << Playlist.track_to_favourite(e)  %>
         </button></td>
@@ -47,5 +47,3 @@
 
 </div>
 </div>
-
-<!-- PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe -->

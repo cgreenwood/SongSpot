@@ -3,8 +3,8 @@
 <div class="container">
   <h3>My Bugs</h3>
   <% @bugs.each do |bug| %>
+  <div class="bug_post <%= bug.bug_status %>">
   <% if current_user && current_user.id == bug.user_id %>
-  <div class="row <%= bug.bug_status %>">
     <h3><%= bug.title %></h3>
     <h2>Bug Type: <strong><%= bug.bug_type %></strong>
       Bug Status: <strong><%= bug.bug_status %></strong></h2>
@@ -26,14 +26,14 @@
 <% if current_user && current_user.admin? %>
   <h3>All Bugs</h3>
   <% @bugs.each do |bug| %>
-  <div class="row <%= bug.bug_status %>">
+  <div class="bug_post <%= bug.bug_status %>">
     <h3><%= bug.title %></h3>
     <h2>Bug Type: <strong><%= bug.bug_type %></strong>
       Bug Status: <strong><%= bug.bug_status %></strong></h2>
     <p><%= bug.content %></p>
     <p class="pull-right">
       <button type="button" class="btn btn-primary">
-        <%= link_to 'Show', bug %>
+        <%= link_to 'Show', '#' %>
       </button>
       <button type="button" class="btn btn-primary">
         <%= link_to 'Edit', edit_bug_path(bug) %>
@@ -41,7 +41,9 @@
       <button type="button" class="btn btn-primary">
         <%= link_to 'Destroy', bug, method: :delete, data: { confirm: 'Are you sure?' } %>
       </button>
+    </p>
   </div>
   <% end %>
+
   <% end %>
 </div>

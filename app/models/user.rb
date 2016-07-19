@@ -9,32 +9,23 @@ class User < ApplicationRecord
   has_many :bugs
   serialize :favourites, Array
 
-  def link_spotify
-    response = RestClient.get 'https://accounts.spotify.com/authorize', \
-                              "?client_id=#{ENV['SPOTIFY_CLIENT_ID']}" \
-                              '&response_type=code&redirect_uri=http://localhost:3000/callback'
-    Rails.logger.debug response
+  def self.link_spotify
+    url = ERB::Util.url_encode('http://localhost:3000/callback')
+    redirect_to 'https://accounts.spotify.com/authorize' \
+                               "?client_id=#{ENV['SPOTIFY_CLIENT_ID']}" \
+                               "&response_type=code&redirect_uri=#{url}"
+  end
+
+  def self.get_user_favourite_tracks(user_refresh_token)
+    token = Playlist.get_spotify_access_token(user_refresh_token)
+    base64 = Base64.urlsafe_encode64(ENV['SPOTIFY_CLIENT_ID'] + ':' +
+                                     ENV['SPOTIFY_SECRET_ID'])
+    # For top tracks use /top/tracks but first get user-top-read
+    response = RestClient.get 'https://api.spotify.com/v1/me/tracks?limit=50',
+                              'Authorization' => "Bearer #{token}"
+    data = JSON.parse(response)
+    Rails.logger.debug data
+    return data
+
   end
 end
-
-# def self.generate_song_playlist(params)
-#   format_seeds(params)
-#   verify_params(params)
-#   token = authorize
-#   response = RestClient.get 'https://api.spotify.com/v1/recommendations' \
-#                              "?limit=#{@limit}&market=#{params[:market]}" \
-#                              "&min_popularity=#{@min_pop}" \
-#                              "&seed_tracks=#{@seeds}",
-#                             'Authorization' => "Bearer #{token}"
-#   JSON.parse(response)
-# end
-#
-# def self.authorize
-#   base64 = Base64.urlsafe_encode64(ENV['SPOTIFY_CLIENT_ID'] + ':' +
-#                                    ENV['SPOTIFY_SECRET_ID'])
-#   response = RestClient.post 'https://accounts.spotify.com/api/token',
-#                              { 'grant_type' => 'client_credentials' },
-#                              'Authorization' => "Basic #{base64}"
-#   data = JSON.parse(response)
-#   data['access_token']
-# end
