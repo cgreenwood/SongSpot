@@ -14,7 +14,7 @@ class PagesController < ApplicationController
   end
 
   def callback
-    url = ERB::Util.url_encode('http://localhost:3000/callback')
+    url = ERB::Util.url_encode(ENV['CALLBACK_URL'])
     base64 = Base64.urlsafe_encode64(ENV['SPOTIFY_CLIENT_ID'] + ':' +
                                      ENV['SPOTIFY_SECRET_ID'])
     response = RestClient.post 'https://accounts.spotify.com/api/token',
