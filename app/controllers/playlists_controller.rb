@@ -4,6 +4,7 @@ class PlaylistsController < ApplicationController
     if current_user
       if current_user.spotify_refresh_token?
         @favourites = User.get_user_favourite_tracks(current_user.spotify_refresh_token)
+        @song_choices = @favourites['items'].each.map { |e| [e['track']['name'],e['track']['uri']]}
       end
     else
       flash.now[:notice] = 'Please login or create an account.'

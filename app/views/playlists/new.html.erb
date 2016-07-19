@@ -19,7 +19,19 @@
 <%= hidden_field_tag(:market,"GB") %>
 
 <% if current_user && current_user.spotify_refresh_token? %>
+<div>
+  <%= label_tag(:seed_id_1,"Song 1") %>
+  <%= select_tag(:seed_id_1, options_for_select(@song_choices)) %>
+  <%= label_tag(:seed_id_2,"Song 2") %>
+  <%= select_tag(:seed_id_2, options_for_select(@song_choices)) %>
+  <%= label_tag(:seed_id_3,"Song 3") %>
+  <%= select_tag(:seed_id_3, options_for_select(@song_choices)) %>
+  <%= label_tag(:seed_id_4,"Song 4") %>
+  <%= select_tag(:seed_id_4, options_for_select(@song_choices)) %>
+  <%= label_tag(:seed_id_5,"Song 5") %>
+  <%= select_tag(:seed_id_5, options_for_select(@song_choices)) %>
 
+</div>
 <% else %>
 <div>
   <p>Copy Song URI:</p>
@@ -49,6 +61,4 @@
 <div>
   <%=submit_tag 'Submit' %>
 </div>
-
-<p><%= @favourites %></p>
 <%end%>

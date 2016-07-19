@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     url = ERB::Util.url_encode('http://localhost:3000/callback')
     redirect_to 'https://accounts.spotify.com/authorize' \
                                "?client_id=#{ENV['SPOTIFY_CLIENT_ID']}" \
-                               "&response_type=code&redirect_uri=#{url}"
+                               "&response_type=code&redirect_uri=#{url}&scope=user-top-read"
   end
 
 end
