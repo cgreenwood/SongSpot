@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   def show
     if current_user && (User.find(params[:id]).name == current_user.name || current_user.admin?)
       if current_user.spotify_refresh_token?
+        User.update_positivity
         @favourites = User.get_user_favourite_tracks(User.find(params[:id]).spotify_refresh_token)
       end
       @user = User.find(params[:id])

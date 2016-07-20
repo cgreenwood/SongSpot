@@ -14,7 +14,6 @@ class PagesController < ApplicationController
   end
 
   def show_positivity
-    User.update_positivity
     @users = User.all.select { |u| u.positivity_score }
     @users = @users.sort_by { |u| u.positivity_score }.reverse
   end
