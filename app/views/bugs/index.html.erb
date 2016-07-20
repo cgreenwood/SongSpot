@@ -3,8 +3,9 @@
 <div class="container">
   <h3>My Bugs</h3>
   <% @bugs.each do |bug| %>
-  <div class="bug_post <%= bug.bug_status %>">
   <% if current_user && current_user.id == bug.user_id %>
+  <div class="bug_post <%= bug.bug_status %>">
+
     <h3><%= bug.title %></h3>
     <h2>Bug Type: <strong><%= bug.bug_type %></strong>
       Bug Status: <strong><%= bug.bug_status %></strong></h2>
