@@ -8,6 +8,9 @@
 </div>
 <% if current_user && current_user.spotify_refresh_token? %>
 <div>
+  <%= if @user.positivity_score? %>
+  <p>Your Positivity score is <%= @user.positivity_score %>/1.00</p>
+  <% end %>
   <h2>Your Favourites</h2>
 
   <table class="table">

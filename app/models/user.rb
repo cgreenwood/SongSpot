@@ -24,7 +24,13 @@ class User < ApplicationRecord
     response = RestClient.get 'https://api.spotify.com/v1/me/top/tracks?limit=50',
                               'Authorization' => "Bearer #{token}"
     data = JSON.parse(response)
-    return data
-
   end
+
+  def self.get_audio_features_of_favourites(track_ids)
+    access_token = Playlist.authorize
+    response = RestClient.get "https://api.spotify.com/v1/audio-features?ids=#{track_ids}",
+                  'Authorization' => "Bearer #{access_token}"
+    data = JSON.parse(response)
+  end
+
 end

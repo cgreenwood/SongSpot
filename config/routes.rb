@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   get  '/contact', to: 'pages#contact'
   get  '/help',    to: 'pages#help'
   get  '/callback', to: 'pages#callback'
+  get '/positivity', to: 'pages#show_positivity'
 end

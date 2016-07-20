@@ -13,6 +13,11 @@ class PagesController < ApplicationController
   def help
   end
 
+  def show_positivity
+    @users = User.all.select { |u| u.positivity_score }
+    @users = @users.sort_by { |u| u.positivity_score }
+  end
+
   def callback
     url = ERB::Util.url_encode(ENV['CALLBACK_URL'])
     base64 = Base64.urlsafe_encode64(ENV['SPOTIFY_CLIENT_ID'] + ':' +

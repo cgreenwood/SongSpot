@@ -5,6 +5,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home",   root_path %></li>
         <li><%= link_to "Help",   help_path %></li>
+        <li><%= link_to "Positivity Scores", positivity_path %></li>
         <li><%= link_to "Playlist", new_playlist_path %></li>
         <li><ul class="nav navbar-nav pull-right">
             <% if user_signed_in? %>
