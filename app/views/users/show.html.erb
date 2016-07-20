@@ -9,7 +9,7 @@
 <% if current_user && current_user.spotify_refresh_token? %>
 <div>
   <% if @user.positivity_score? %>
-  <p>Your Positivity score is <%= @user.positivity_score %>/1.00</p>
+  <p>Your Positivity score is <%= (@user.positivity_score * 100).round(2) %>/100</p>
   <% end %>
   <h2>Your Favourites</h2>
 
