@@ -27,10 +27,12 @@
         <td><%= e["artists"].first["name"] %></td>
         <td><%= e["album"]["name"] %></td>
         <td><%= e["popularity"] %>/100</td>
+        <% if current_user && current_user.admin? %>
         <td><button type="button" class="btn btn-primary btn-add">+
 
           <% current_user.favourites << Playlist.track_to_favourite(e)  %>
         </button></td>
+        <% end %>
         <%= hidden_field_tag("tracks_#{e['id']}",e)%>
 
       </tr>
