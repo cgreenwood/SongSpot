@@ -15,7 +15,7 @@ class PagesController < ApplicationController
 
   def show_positivity
     @users = User.all.select { |u| u.positivity_score }
-    @users = @users.sort_by { |u| u.positivity_score }
+    @users = @users.sort_by { |u| u.positivity_score }.reverse
   end
 
   def callback
