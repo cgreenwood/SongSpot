@@ -1,0 +1,35 @@
+<% provide(:title, "About") %>
+<div class="container">
+  <div>
+    <h1>Positivity</h1>
+    <% if current_user && current_user.positivity_score? %>
+    <h3>Your Positivty Score:
+      <%= (current_user.positivity_score * 100).round(2) %>/100
+    </h3>
+    <% end %>
+  </div>
+
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Positivity Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% i = 0 %>
+          <% @users.each do |u| %>
+          <% if u.positivity_score? %>
+            <tr>
+              <td><%= i += 1 %></td>
+              <td><%= u.name %></td>
+              <td><%= (u.positivity_score * 100).round(2) %>/100</td>
+            </tr>
+            <% end %>
+            <% end %>
+        </tbody>
+      </table>
+</div>
