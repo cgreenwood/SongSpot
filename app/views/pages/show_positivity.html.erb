@@ -3,7 +3,7 @@
   <div>
     <h1>Positivity</h1>
     <% if current_user && current_user.positivity_score? %>
-    <h3>Your Positivty Score:
+    <h3>Your Positivity Score:
       <%= (current_user.positivity_score * 100).round(2) %>/100
     </h3>
     <% end %>
