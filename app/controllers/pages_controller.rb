@@ -30,6 +30,7 @@ class PagesController < ApplicationController
     data = JSON.parse(response)
     token = data['refresh_token']
     current_user.update_attributes(spotify_refresh_token: token)
+    User.update_positivity
     redirect_to user_path(current_user)
   end
 end
