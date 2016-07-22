@@ -31,14 +31,22 @@
               <td><%= i += 1 %></td>
               <td><%= u.name %></td>
               <td><%= (u.positivity_score * 100).round(2) %>/100</td>
+              <% if u.old_positivity_score? %>
               <td><%= (u.old_positivity_score * 100).round(2) %>/100</td>
+              <% else %>
+              <td>N/A</td>
+              <% end %>
               <td>
+                <% if u.old_positivity_score? %>
                 <% if u.positivity_score > u.old_positivity_score %>
                 <i class="fa fa-arrow-up" aria-hidden="true"></i>
                 <% elsif u.positivity_score < u.old_positivity_score %>
                 <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                <% else %>
+                <% elsif u.positivity_score == u.old_positivity_score %>
                 <i class="fa fa-arrows-h" aria-hidden="true"></i>
+                <% end %>
+                <% else %>
+                N/A
                 <% end %>
             </tr>
             <% end %>
