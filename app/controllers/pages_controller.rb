@@ -13,6 +13,18 @@ class PagesController < ApplicationController
   def help
   end
 
+  def send_to_slack
+    all_channels = User.get_slack_channels
+    channels = User.select_channels(all_channels)
+    @users = User.all.select { |u| u.positivity_score }
+    @users = @users.sort_by { |u| u.positivity_score }.reverse
+    ciab_users = User.get_ciab_users(@users)
+    message = User.create_message(ciab_users)
+    User.send_to_slack(channels,"@cgreenwood",message)
+    Rails.logger.debug channels
+    redirect_to positivity_path
+  end
+
   def show_positivity
     @users = User.all.select { |u| u.positivity_score }
     @users = @users.sort_by { |u| u.positivity_score }.reverse

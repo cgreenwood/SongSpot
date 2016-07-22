@@ -32,4 +32,9 @@
             <% end %>
         </tbody>
       </table>
+      <% if current_user && current_user.admin? %>
+        <button type="button" class="btn btn-primary">
+          <%= link_to "Send to Slack", slack_path %>
+        </button>
+      <% end %>
 </div>

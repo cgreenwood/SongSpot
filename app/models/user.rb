@@ -9,6 +9,52 @@ class User < ApplicationRecord
   has_many :bugs
   serialize :favourites, Array
 
+  def self.get_slack_channels
+    response = RestClient.get "https://slack.com/api/channels.list?token=#{ENV['USER_SLACK_TOKEN']}"
+    data = JSON.parse(response)
+  end
+
+  def self.select_channels(all_channels)
+    channels = []
+    all_channels['channels'].each do |c|
+      channels << {'name' => c['name'], 'id' => c['id']}
+    end
+    return channels
+  end
+
+  def self.get_ciab_users(users)
+    ciab_users = []
+    users.each do |u|
+      if (u.name == "Carl Greenwood" || u.name == "Jamie Cleare" ||
+          u.name == "Will Stokely" || u.name == "adam" || u.name == "Kevin Hughes" ||
+          u.name == "alex")
+          ciab_users << u
+        end
+      end
+      return ciab_users
+  end
+
+  def self.create_message(ciab_users)
+    message = "Positivity Scores: \n"
+    rank = 1
+    ciab_users.each do |u|
+        score = (u.positivity_score * 100).round(2)
+        message = message + "#{rank} - #{u.name} - #{score}/100 \n "
+    end
+
+    return message
+  end
+
+  def self.send_to_slack(channels,channel_name,message)
+    RestClient.post 'https://slack.com/api/chat.postMessage',
+                    {'token' => ENV['USER_SLACK_TOKEN'],
+                     'channel' => channel_name,
+                     'text' => message,
+                     'as_user' => 'false',
+                     'username' => 'SongSpot Bot'}
+  end
+
+
   def self.link_spotify
     url = ERB::Util.url_encode('http://localhost:3000/callback')
     redirect_to 'https://accounts.spotify.com/authorize' \

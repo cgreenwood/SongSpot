@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   get  '/help',    to: 'pages#help'
   get  '/callback', to: 'pages#callback'
   get '/positivity', to: 'pages#show_positivity'
+  get '/slack', to: 'pages#send_to_slack'
 end
