@@ -20,7 +20,7 @@ class PagesController < ApplicationController
     @users = @users.sort_by { |u| u.positivity_score }.reverse
     ciab_users = User.get_ciab_users(@users)
     message = User.create_message(ciab_users)
-    User.send_to_slack(channels,"@cgreenwood",message)
+    User.send_to_slack(channels,"check-in",message)
     Rails.logger.debug channels
     redirect_to positivity_path
   end
