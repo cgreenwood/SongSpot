@@ -39,9 +39,9 @@ class User < ApplicationRecord
     rank = 1
     ciab_users.each do |u|
         score = (u.positivity_score * 100).round(2)
-        message = message + "#{rank} - #{u.name} - #{score}/100 \n "
+        message = message + "#{rank} - #{u.name.split(" ").first} - #{score}/100 \n "
     end
-    message = message + "\n #{ciab_users.last.name} is feeling a little down. \n"
+    message = message + "\n #{ciab_users.last.name.split(" ").first} are you feeling a litte down? \n"
     message = message + "How about some happy music? https://open.spotify.com/user/spotify/playlist/2PXdUld4Ueio2pHcB6sM8j"
     return message
   end
