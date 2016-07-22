@@ -34,12 +34,23 @@ class User < ApplicationRecord
       return ciab_users
   end
 
+  def self.get_movement(user)
+    if user.positivity_score > user.old_positivity_score
+      return "Up from last week."
+    elsif user.positivity_score < user.old_positivity_score
+      return "Down from last week."
+    else
+      return "Same as last week."
+    end
+  end
+
   def self.create_message(ciab_users)
     message = "Positivity Scores: \n"
     rank = 1
     ciab_users.each do |u|
+      movement = get_movement(u)
         score = (u.positivity_score * 100).round(2)
-        message = message + "#{rank} - #{u.name.split(" ").first} - #{score}/100 \n "
+        message = message + "#{rank} - #{u.name.split(" ").first} - #{score}/100 - #{movement}\n "
     end
     message = message + "\n #{ciab_users.last.name.split(" ").first} are you feeling a litte down? \n"
     message = message + "How about some happy music? https://open.spotify.com/user/spotify/playlist/2PXdUld4Ueio2pHcB6sM8j"
