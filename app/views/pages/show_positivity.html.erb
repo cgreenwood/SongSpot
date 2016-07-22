@@ -17,6 +17,10 @@
             <th>Rank</th>
             <th>Name</th>
             <th>Positivity Score</th>
+            <th>Old Positivity Score</th>
+            <th>Up <i class="fa fa-arrow-up" aria-hidden="true"></i>/
+              Down <i class="fa fa-arrow-down" aria-hidden="true"></i>/
+              Same <i class="fa fa-arrows-h" aria-hidden="true"></i></th>
           </tr>
         </thead>
         <tbody>
@@ -27,6 +31,15 @@
               <td><%= i += 1 %></td>
               <td><%= u.name %></td>
               <td><%= (u.positivity_score * 100).round(2) %>/100</td>
+              <td><%= (u.old_positivity_score * 100).round(2) %>/100</td>
+              <td>
+                <% if u.positivity_score > u.old_positivity_score %>
+                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                <% elsif u.positivity_score < u.old_positivity_score %>
+                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                <% else %>
+                <i class="fa fa-arrows-h" aria-hidden="true"></i>
+                <% end %>
             </tr>
             <% end %>
             <% end %>
