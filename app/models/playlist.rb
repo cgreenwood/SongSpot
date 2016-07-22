@@ -8,11 +8,14 @@ class Playlist
 
   def self.verify_params(params)
     @seeds = '4uLU6hMCjMI75M1A2tKUQC' unless @seeds.present?
+    @limit = params[:limit].present? ? params[:limit] : 20
+    @min_pop = params[:min_pop].present? ? params[:min_pop] : 50
     if params[:min_pop].to_i > 100 || params[:min_pop].to_i < 1
-      @min_pop = params[:min_pop] = 20
+      @min_pop = params[:min_pop] = 50
     end
-    @limit = params[:limit] = 20 unless params[:limit].present?
-    @min_pop = params[:min_pop] = 50 unless params[:min_pop].present?
+    if params[:limit].to_i > 100 || params[:limit].to_i < 1
+      @limit = params[:limit] = 20
+    end
   end
 
   def self.generate_song_playlist(params)
