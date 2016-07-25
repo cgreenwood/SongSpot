@@ -27,7 +27,15 @@ class Playlist
                                "&min_popularity=#{@min_pop}" \
                                "&seed_tracks=#{@seeds}",
                               'Authorization' => "Bearer #{token}"
-    JSON.parse(response)
+    data = JSON.parse(response)
+  end
+
+  def self.generate_mood_playlist(params)
+    token = authorize
+    playlists = get_mood_playlists
+    response = RestClient.get "https://api.spotify.com/v1/users/spotify/playlists/#{params[:mood]}/tracks",
+                              'Authorization' => "Bearer #{token}"
+    data = JSON.parse(response)
   end
 
   def self.authorize
@@ -46,7 +54,14 @@ class Playlist
       tracks << e['id']
     end
     tracks = tracks.join(',')
-    tracks
+  end
+
+  def self.extract_playlist_tracks(trackset)
+    tracks = []
+    trackset['items'].each do |e|
+      tracks << e['track']['id']
+    end
+    tracks = tracks.join(',')
   end
 
   def self.get_spotify_access_token(user_refresh_token)
@@ -60,12 +75,13 @@ class Playlist
     data['access_token']
   end
 
-  def self.track_to_favourite(track)
-    favourite = {}
-    favourite['track_id'] = track['id']
-    favourite['track_name'] = track['name']
-    favourite['artist_name'] = track['artists'].first['name']
-    favourite['album_name'] = track['album']['name']
-    favourite['album_art'] = track['album']['images'].third['url']
+  def self.get_mood_playlists
+    token = authorize
+    response = RestClient.get "https://api.spotify.com/v1/browse/categories/mood/playlists",
+                              'Authorization' => "Bearer #{token}"
+    data = JSON.parse(response)
   end
-end
+
+  
+
+  end

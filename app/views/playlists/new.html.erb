@@ -1,6 +1,6 @@
 
 <%= form_tag(display_playlist_path) do |f| %>
-
+<h3>Playlist based on Songs</h3>
 <div class=container>
   <%= label_tag(:limit,"Number of tracks:") %>
   <p>This is the number of songs you want recommended to you. Between 1 and 100</p>
@@ -15,6 +15,8 @@
   <p>This field can be left blank and will default to 50 which is average popularity.</p>
   <%= number_field_tag(:min_pop, options = {:min => 1, :max => 100}) %>
 </div>
+
+<%= hidden_field_tag(:playlist_type,'songs') %>
 
 <%= hidden_field_tag(:market,"GB") %>
 <p>Choose songs from your favourite list.</p>
@@ -64,3 +66,16 @@
   <%=submit_tag 'Submit' %>
 </div>
 <%end%>
+
+<% if current_user && current_user.admin? %>
+<div>
+  <%= form_tag(display_playlist_path) do |f| %>
+  <h3>Playlist based on Mood</h3>
+  <%= hidden_field_tag(:playlist_type,'playlist') %>
+  <%= label_tag(:mood,"Please select a mood:") %>
+  <%= select_tag(:mood, options_for_select(@mood_choices)) %>
+  <p>Click Submit to be get your recommendations!</p>
+  <%=submit_tag 'Submit' %>
+  <% end %>
+</div>
+<% end %>

@@ -1,51 +1,48 @@
 <% provide(:title, "My Recommendations") %>
 <div class="center jumbotron">
   <h1>SongSpot - Playlist</h1>
-
-  <h2>
-    Spotify Recommends...
-  </h2>
+  <h2>Spotify Recommends...</h2>
   <div class=container>
-
-  <div class=col-md-7>
-    <table class="table">
-    <thead>
-      <tr>
-        <th>Cover</th>
-        <th>Song Name</th>
-        <th>Artist</th>
-        <th>Album</th>
-        <th>Popularity</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @recommendations["tracks"].each do |e| %>
-      <tr>
-        <td><img src=<%= e["album"]["images"].third["url"] %> alt="rss feed"/></td>
-        <td><%= e["name"] %></td>
-        <td><%= e["artists"].first["name"] %></td>
-        <td><%= e["album"]["name"] %></td>
-        <td><%= e["popularity"] %>/100</td>
-        <% if current_user && current_user.admin? %>
-        <td><button type="button" class="btn btn-primary btn-add">+
-
-          <% current_user.favourites << Playlist.track_to_favourite(e)  %>
-        </button></td>
-        <% end %>
-        <%= hidden_field_tag("tracks_#{e['id']}",e)%>
-
-      </tr>
-        <% end %>
-    </tbody>
-  </table>
-
-  </div>
-
+    <div class=col-md-7>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Cover</th>
+            <th>Song Name</th>
+            <th>Artist</th>
+            <th>Album</th>
+            <th>Popularity</th>
+            <th>Save Track</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if params[:playlist_type] == "songs" %>
+            <% @recommendations["tracks"].each do |e| %>
+              <tr>
+                <td><img src=<%= e["album"]["images"].third["url"] %> alt="rss feed"/></td>
+                <td><%= e["name"] %></td>
+                <td><%= e["artists"].first["name"] %></td>
+                <td><%= e["album"]["name"] %></td>
+                <td><%= e["popularity"] %>/100</td>
+                <td><%= link_to "+", add_track_to_your_music_path(e['id']), class: 'add_music' %></button></td>
+              </tr>
+            <% end %>
+          <% elsif params[:playlist_type] == "playlist" %>
+            <% @mood_songs['items'].each do |e| %>
+              <tr>
+                <td><img src=<%= e['track']['album']['images'].third['url'] %> alt='rss feed'/></td>
+                <td><%= e['track']['name'] %></td>
+                <td><%= e['track']['artists'].first['name'] %></td>
+                <td><%= e['track']['album']['name'] %></td>
+                <td><%= e['track']['popularity'] %></td>
+                <td>WIP</td>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   <div class=col-md-3 pull-left>
     <iframe src="https://embed.spotify.com/?uri=spotify:trackset:Tracks:<%= @tracks %>&theme=white&view=coverart" frameborder="0" allowtransparency="true" width="600" height="400" frameborder="0" allowtransparency="true"></iframe>
   </div>
-
-
 </div>
 </div>

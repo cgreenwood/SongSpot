@@ -11,6 +11,8 @@ gem 'http-cookie', '~> 1.0', '>= 1.0.2'
 gem 'mime-types', '2.99.2'
 gem 'netrc', '~> 0.11.0'
 
+gem 'gon', '~> 6.1'
+
 # Use Bootstrap
 gem 'bootstrap-sass'
 # For password encryption (Hash function)
