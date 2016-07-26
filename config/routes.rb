@@ -22,6 +22,6 @@ Rails.application.routes.draw do
   get '/positivity', to: 'pages#show_positivity'
   get '/slack', to: 'pages#send_to_slack'
 
-  get '/add_track_to_your_music', to: 'playlist#add_track_to_your_music'
-  post '/add_track_to_your_music', to: 'playlist#add_track_to_your_music'
+  get '/add_track_to_your_music', to: 'playlists#add_track_to_your_music'
+  post '/add_track_to_your_music', to: 'playlists#add_track_to_your_music'
 end

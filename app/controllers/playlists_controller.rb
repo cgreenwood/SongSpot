@@ -53,7 +53,8 @@ class PlaylistsController < ApplicationController
     redirect_to new_playlist_path
   end
 
-  def add_track_to_your_music(track_id)
+  def add_track_to_your_music
+    track_id = params["id"]
     Rails.logger.debug '=' * 100
     Rails.logger.debug track_id
     Rails.logger.debug '=' * 100

@@ -17,14 +17,16 @@
         </thead>
         <tbody>
           <% if params[:playlist_type] == "songs" %>
-            <% @recommendations["tracks"].each do |e| %>
+            <% @recommendations['tracks'].each do |e| %>
               <tr>
-                <td><img src=<%= e["album"]["images"].third["url"] %> alt="rss feed"/></td>
+                <td><img src=<%= e["album"]["images"].last["url"] %> alt="rss feed"/></td>
                 <td><%= e["name"] %></td>
                 <td><%= e["artists"].first["name"] %></td>
                 <td><%= e["album"]["name"] %></td>
                 <td><%= e["popularity"] %>/100</td>
-                <td><%= link_to "+", add_track_to_your_music_path(e['id']), class: 'add_music' %></button></td>
+                <td>
+                <%= tag "input", {value:"+", type: "button", onclick: "add_music('#{e["id"]}')" , :class=>"btn btn-primary" , :id=>"'#{e['id']}'"} %>
+                </td>
               </tr>
             <% end %>
           <% elsif params[:playlist_type] == "playlist" %>
@@ -35,7 +37,9 @@
                 <td><%= e['track']['artists'].first['name'] %></td>
                 <td><%= e['track']['album']['name'] %></td>
                 <td><%= e['track']['popularity'] %></td>
-                <td>WIP</td>
+                <td>
+                  <%= tag "input", {value:"+", type: "button", onclick: "add_music('#{e["track"]["id"]}')" , :class=>"btn btn-primary"} %>
+                </td>
             <% end %>
           <% end %>
         </tbody>

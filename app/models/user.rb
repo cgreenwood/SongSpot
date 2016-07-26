@@ -101,7 +101,7 @@ class User < ApplicationRecord
     base64 = Base64.urlsafe_encode64(ENV['SPOTIFY_CLIENT_ID'] + ':' +
                                      ENV['SPOTIFY_SECRET_ID'])
     # For top tracks use /top/tracks but first get user-top-read
-    response = RestClient.get 'https://api.spotify.com/v1/me/top/tracks?limit=50',
+    response = RestClient.get 'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term',
                               'Authorization' => "Bearer #{token}"
     data = JSON.parse(response)
   end

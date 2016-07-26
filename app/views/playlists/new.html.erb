@@ -67,7 +67,7 @@
 </div>
 <%end%>
 
-<% if current_user && current_user.admin? %>
+<% if current_user%>
 <div>
   <%= form_tag(display_playlist_path) do |f| %>
   <h3>Playlist based on Mood</h3>
