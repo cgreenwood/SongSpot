@@ -17,6 +17,6 @@ class UsersController < ApplicationController
     redirect_to 'https://accounts.spotify.com/authorize' \
                                "?client_id=#{ENV['SPOTIFY_CLIENT_ID']}" \
                                "&response_type=code&redirect_uri=#{url}" \
-                               "&scope=user-top-read"
+                               "&scope=user-top-read%20user-library-modify"
   end
 end

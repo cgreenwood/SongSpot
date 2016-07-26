@@ -3,11 +3,11 @@ class PlaylistsController < ApplicationController
   def new
     if current_user
       if current_user.spotify_refresh_token?
-        @mood_playlists = Playlist.get_mood_playlists
-        @mood_choices = @mood_playlists['playlists']['items'].each.map { |e| [e['name'],e['id']]}
         @favourites = User.get_user_favourite_tracks(current_user.spotify_refresh_token)
         @song_choices = @favourites['items'].each.map { |e| [e['name'],e['uri']]}
       end
+      @mood_playlists = Playlist.get_mood_playlists
+      @mood_choices = @mood_playlists['playlists']['items'].each.map { |e| [e['name'],e['id']]}
     else
       flash.now[:notice] = 'Please login or create an account.'
       redirect_to new_user_session_path
@@ -54,9 +54,18 @@ class PlaylistsController < ApplicationController
   end
 
   def add_track_to_your_music
+    base64 = Base64.urlsafe_encode64(ENV['SPOTIFY_CLIENT_ID'] + ':' +
+                                     ENV['SPOTIFY_SECRET_ID'])
+    # Rails.logger.debug "Refresh token: #{current_user.spotify_refresh_token}"
+    token = Playlist.get_spotify_access_token(current_user.spotify_refresh_token)
+    # Rails.logger.debug '=' * 100
+    # Rails.logger.debug "Access token: #{token}"
     track_id = params["id"]
-    Rails.logger.debug '=' * 100
-    Rails.logger.debug track_id
-    Rails.logger.debug '=' * 100
+    # Rails.logger.debug "https://api.spotify.com/v1/me/tracks ids => #{track_id} Authorization Bearer #{token}"
+    # Rails.logger.debug '=' * 100
+    # Rails.logger.debug "Adding #{track_id} to #{current_user.name} library."
+    # Rails.logger.debug '=' * 100
+    RestClient.put "https://api.spotify.com/v1/me/tracks?ids=#{params["id"]}",
+                   'Authorization' => "Bearer #{token}"
   end
 end

@@ -1,7 +1,7 @@
 # Pages controller for displaying the basic pages (home,about,contact,help)
 class PagesController < ApplicationController
   def home
-    @articles = Article.all
+    @articles = Article.all.order(created_at: :desc)
   end
 
   def about
@@ -40,6 +40,9 @@ class PagesController < ApplicationController
                                 'redirect_uri' => url },
                                 'Authorization' => "Basic #{base64}"
     data = JSON.parse(response)
+    Rails.logger.debug "=" * 100
+    Rails.logger.debug data
+    Rails.logger.debug "=" * 100
     token = data['refresh_token']
     current_user.update_attributes(spotify_refresh_token: token)
     User.update_positivity
