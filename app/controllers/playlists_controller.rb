@@ -31,6 +31,17 @@ class PlaylistsController < ApplicationController
               @token = Playlist.get_spotify_access_token(current_user.spotify_refresh_token)
             end
             render 'view'
+        elsif params[:playlist_type] == 'favourites'
+          @favourites = User.get_user_favourite_tracks(current_user.spotify_refresh_token)
+          Rails.logger.debug "Before extraction"
+          Rails.logger.debug @favourites
+          @tracks = Playlist.extract_favourites_tracks(@favourites)
+          Rails.logger.debug "Extracted tracks"
+          Rails.logger.debug @tracks
+          if current_user.spotify_refresh_token?
+            @token = Playlist.get_spotify_access_token(current_user.spotify_refresh_token)
+          end
+          render 'view'
           end
       rescue Exception => e
         Rails.logger.debug e
@@ -54,18 +65,14 @@ class PlaylistsController < ApplicationController
   end
 
   def add_track_to_your_music
-    base64 = Base64.urlsafe_encode64(ENV['SPOTIFY_CLIENT_ID'] + ':' +
-                                     ENV['SPOTIFY_SECRET_ID'])
-    # Rails.logger.debug "Refresh token: #{current_user.spotify_refresh_token}"
     token = Playlist.get_spotify_access_token(current_user.spotify_refresh_token)
-    # Rails.logger.debug '=' * 100
-    # Rails.logger.debug "Access token: #{token}"
-    track_id = params["id"]
-    # Rails.logger.debug "https://api.spotify.com/v1/me/tracks ids => #{track_id} Authorization Bearer #{token}"
-    # Rails.logger.debug '=' * 100
-    # Rails.logger.debug "Adding #{track_id} to #{current_user.name} library."
-    # Rails.logger.debug '=' * 100
-    RestClient.put "https://api.spotify.com/v1/me/tracks?ids=#{params["id"]}",
-                   'Authorization' => "Bearer #{token}"
+    Rails.logger.debug token
+    Rails.logger.debug "Bearer #{token}"
+    begin
+      RestClient.put "https://api.spotify.com/v1/me/tracks?ids=#{params["id"]}",
+                     :Authorization => "Bearer #{token}"
+    rescue => e
+      Rails.logger.debug e.response
+    end
   end
 end

@@ -64,6 +64,14 @@ class Playlist
     tracks = tracks.join(',')
   end
 
+  def self.extract_favourites_tracks(favourites)
+    tracks = []
+    favourites['items'].each do |e|
+      tracks << e['id']
+    end
+    tracks = tracks.join(',')
+  end
+
   def self.get_spotify_access_token(user_refresh_token)
     base64 = Base64.urlsafe_encode64(ENV['SPOTIFY_CLIENT_ID'] + ':' +
                                      ENV['SPOTIFY_SECRET_ID'])
@@ -82,6 +90,6 @@ class Playlist
     data = JSON.parse(response)
   end
 
-  
+
 
   end

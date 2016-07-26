@@ -44,7 +44,19 @@
                     <%= tag "input", {value:"+", type: "button", onclick: "add_music('#{e["track"]["id"]}')" , :class=>"btn btn-primary"} %>
                   <% end %>
                 </td>
+              </tr>
             <% end %>
+          <% elsif params[:playlist_type] == "favourites" %>
+          <% @favourites['items'].each do |e| %>
+            <tr>
+              <td><img src=<%= e["album"]["images"].last["url"] %> alt="rss feed"/></td>
+              <td><%= e["name"] %></td>
+              <td><%= e["artists"].first["name"] %></td>
+              <td><%= e["album"]["name"] %></td>
+              <td><%= e["popularity"] %>/100</td>
+            </tr>
+          <% end %>
+
           <% end %>
         </tbody>
       </table>

@@ -79,3 +79,14 @@
   <% end %>
 </div>
 <% end %>
+
+<% if current_user && current_user.spotify_refresh_token? %>
+<div>
+  <%= form_tag(display_playlist_path) do |f| %>
+  <h3>Playlist of your favourite tracks</h3>
+  <%= hidden_field_tag(:playlist_type, 'favourites') %>
+  <p>Click Submit to see play your favourites!</p>
+  <%= submit_tag 'Submit' %>
+  <% end %>
+</div>
+<% end %>
