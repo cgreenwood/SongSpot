@@ -12,7 +12,15 @@
   <p>Your Positivity score is <%= (@user.positivity_score * 100).round(2) %>/100</p>
   <% end %>
   <h2>Your Favourites</h2>
-
+  <% if current_user && current_user.spotify_refresh_token? %>
+  <div>
+    <%= form_tag(display_playlist_path) do |f| %>
+    <%= hidden_field_tag(:playlist_type, 'favourites') %>
+    <%= submit_tag 'Click me to listen to your favourites!*' %>
+    <small>* Will open a new page</small>
+    <% end %>
+  </div>
+  <% end %>
   <table class="table">
   <thead>
     <tr>
@@ -20,7 +28,6 @@
       <th>Song Name</th>
       <th>Artist</th>
       <th>Album</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -30,11 +37,11 @@
       <td><%= e["name"] %></td>
       <td><%= e['artists'].first['name'] %></td>
       <td><%= e['album']["name"] %></td>
-      <td><button type="button" class="btn btn-primary btn-add">X</button></td>
     </tr>
       <% end %>
   </tbody>
 </table>
+
 <% else %>
 <h2>Please link your account to Spotify using the button below to see favourite tracks</h2>
 <% end %>
