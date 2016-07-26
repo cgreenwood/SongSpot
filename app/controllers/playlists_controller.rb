@@ -69,8 +69,13 @@ class PlaylistsController < ApplicationController
     Rails.logger.debug token
     Rails.logger.debug "Bearer #{token}"
     begin
-      RestClient.put "https://api.spotify.com/v1/me/tracks?ids=#{params["id"]}",
-                     :Authorization => "Bearer #{token}"
+      RestClient::Request.execute(method: :put,
+                           url: "https://api.spotify.com/v1/me/tracks",
+                           payload: '["' + params['id'] +'"]',
+                           headers: {"Content-Type" => "application/json", :Authorization => "Bearer #{token}"}
+                          )
+      # RestClient.put "https://api.spotify.com/v1/me/tracks?ids=#{params["id"]}",
+      #                :Authorization => "Bearer #{token}"
     rescue => e
       Rails.logger.debug e.response
     end
