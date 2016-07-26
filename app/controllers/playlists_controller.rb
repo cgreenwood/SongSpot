@@ -66,8 +66,6 @@ class PlaylistsController < ApplicationController
 
   def add_track_to_your_music
     token = Playlist.get_spotify_access_token(current_user.spotify_refresh_token)
-    Rails.logger.debug token
-    Rails.logger.debug "Bearer #{token}"
     begin
       RestClient::Request.execute(method: :put,
                            url: "https://api.spotify.com/v1/me/tracks",

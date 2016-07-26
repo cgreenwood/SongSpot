@@ -1,10 +1,14 @@
 <% provide(:title, "My Recommendations") %>
+<div class=" center fixedElement" id="player">
+  <h1 class="pull-left">SongSpot - Playlist</h1>
+  <p><iframe src="https://embed.spotify.com/?uri=spotify:trackset:Tracks:<%= @tracks %>&theme=white" width="640" height="80" frameborder="0" allowtransparency="true"></iframe></p>
+</div>
 <div class="center jumbotron">
-  <h1>SongSpot - Playlist</h1>
-  <h2>Spotify Recommends...</h2>
+  <h1> </h1>
+  <h2> </h2>
   <div class=container>
-    <div class=col-md-7>
-      <table class="table">
+    <div class=col-md-12>
+      <table class="table lower_table">
         <thead>
           <tr>
             <th>Cover</th>
@@ -62,7 +66,7 @@
       </table>
     </div>
   <div class=col-md-3 pull-left>
-    <iframe src="https://embed.spotify.com/?uri=spotify:trackset:Tracks:<%= @tracks %>&theme=white&view=coverart" frameborder="0" allowtransparency="true" width="600" height="400" frameborder="0" allowtransparency="true"></iframe>
+    <!--<iframe src="https://embed.spotify.com/?uri=spotify:trackset:Tracks:<%= @tracks %>&theme=white&view=coverart" frameborder="0" allowtransparency="true" width="600" height="400" frameborder="0" allowtransparency="true"></iframe> -->
   </div>
 </div>
 </div>

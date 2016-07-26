@@ -1,92 +1,94 @@
 
-<%= form_tag(display_playlist_path) do |f| %>
-<h3>Playlist based on Songs</h3>
-<div class=container>
-  <%= label_tag(:limit,"Number of tracks:") %>
-  <p>This is the number of songs you want recommended to you. Between 1 and 100</p>
-  <p>This field can be left blank and will default to 20 songs.</p>
-  <%= number_field_tag(:limit, options = {:min => 1,:max => 100}) %>
+<div class="container center jumbotron">
+  <%= form_tag(display_playlist_path) do |f| %>
+  <h3>Playlist based on Songs</h3>
+  <div class=container>
+    <strong><%= label_tag(:limit,"Number of tracks:") %></strong>
+    <p>This is the number of songs you want recommended to you. Between 1 and 100</p>
+    <p>This field can be left blank and will default to 20 songs.</p>
+    <%= number_field_tag(:limit, options = {:min => 1,:max => 100}) %>
 
-</div>
+  </div>
 
-<div>
-  <%= label_tag(:min_pop,"Minimum popularity:") %>
-  <p>Number between 1 and 100 where 100 is most popular. A higher number will give you songs more people listen to on Spotify.</p>
-  <p>This field can be left blank and will default to 50 which is average popularity.</p>
-  <%= number_field_tag(:min_pop, options = {:min => 1, :max => 100}) %>
-</div>
-
-<%= hidden_field_tag(:playlist_type,'songs') %>
-
-<%= hidden_field_tag(:market,"GB") %>
-<p>Choose songs from your favourite list.</p>
-<p>These songs will be what the recommendations are based on</p>
-<% if current_user && current_user.spotify_refresh_token? %>
-<div>
-  <%= label_tag(:seed_id_1,"Song 1") %>
-  <%= select_tag(:seed_id_1, options_for_select(@song_choices)) %>
-  <%= label_tag(:seed_id_2,"Song 2") %>
-  <%= select_tag(:seed_id_2, options_for_select(@song_choices)) %>
-  <%= label_tag(:seed_id_3,"Song 3") %>
-  <%= select_tag(:seed_id_3, options_for_select(@song_choices)) %>
-  <%= label_tag(:seed_id_4,"Song 4") %>
-  <%= select_tag(:seed_id_4, options_for_select(@song_choices)) %>
-  <%= label_tag(:seed_id_5,"Song 5") %>
-  <%= select_tag(:seed_id_5, options_for_select(@song_choices)) %>
-
-</div>
-<% else %>
-<div>
-  <p>Copy Song URI:</p>
-  <small>At least one of these is required.</small>
-  <small>If none entered default will be "Rick Astley - Never Gonna Give You Up"
-  <ol>
-    <li>Open Spotify</li>
-    <li>Right click on a song</li>
-    <li>Click on "Copy Spotify URI"</li>
-  </ol>
-
-</div>
   <div>
-  <%=label_tag(:seed_id_1,"Song 1") %>
-  <%=text_field_tag(:seed_id_1) %>
-  <%=label_tag(:seed_id_2,"Song 2") %>
-  <%=text_field_tag(:seed_id_2) %>
-  <%=label_tag(:seed_id_3,"Song 3") %>
-  <%=text_field_tag(:seed_id_3) %>
-  <%=label_tag(:seed_id_4,"Song 4") %>
-  <%=text_field_tag(:seed_id_4) %>
-  <%=label_tag(:seed_id_5,"Song 5") %>
-  <%=text_field_tag(:seed_id_5) %>
-</div>
-<% end %>
+    <%= label_tag(:min_pop,"Minimum popularity:") %>
+    <p>Number between 1 and 100 where 100 is most popular. A higher number will give you songs more people listen to on Spotify.</p>
+    <p>This field can be left blank and will default to 50 which is average popularity.</p>
+    <%= number_field_tag(:min_pop, options = {:min => 1, :max => 100}) %>
+  </div>
 
-<div>
-  <p>Click Submit to be get your recommendations!</p>
-  <%=submit_tag 'Submit' %>
-</div>
-<%end%>
+  <%= hidden_field_tag(:playlist_type,'songs') %>
 
-<% if current_user %>
-<div>
-  <%= form_tag(display_playlist_path) do |f| %>
-  <h3>Playlist based on Mood</h3>
-  <%= hidden_field_tag(:playlist_type,'playlist') %>
-  <%= label_tag(:mood,"Please select a mood:") %>
-  <%= select_tag(:mood, options_for_select(@mood_choices)) %>
-  <p>Click Submit to be get your recommendations!</p>
-  <%=submit_tag 'Submit' %>
+  <%= hidden_field_tag(:market,"GB") %>
+  <p>Choose songs from your favourite list.</p>
+  <p>These songs will be what the recommendations are based on</p>
+  <% if current_user && current_user.spotify_refresh_token? %>
+  <div>
+    <%= label_tag(:seed_id_1,"Song 1") %>
+    <%= select_tag(:seed_id_1, options_for_select(@song_choices)) %>
+    <%= label_tag(:seed_id_2,"Song 2") %>
+    <%= select_tag(:seed_id_2, options_for_select(@song_choices)) %>
+    <%= label_tag(:seed_id_3,"Song 3") %>
+    <%= select_tag(:seed_id_3, options_for_select(@song_choices)) %>
+    <%= label_tag(:seed_id_4,"Song 4") %>
+    <%= select_tag(:seed_id_4, options_for_select(@song_choices)) %>
+    <%= label_tag(:seed_id_5,"Song 5") %>
+    <%= select_tag(:seed_id_5, options_for_select(@song_choices)) %>
+
+  </div>
+  <% else %>
+  <div>
+    <p>Copy Song URI:</p>
+    <small>At least one of these is required.</small>
+    <small>If none entered default will be "Rick Astley - Never Gonna Give You Up"
+    <ol>
+      <li>Open Spotify</li>
+      <li>Right click on a song</li>
+      <li>Click on "Copy Spotify URI"</li>
+    </ol>
+
+  </div>
+    <div>
+    <%=label_tag(:seed_id_1,"Song 1") %>
+    <%=text_field_tag(:seed_id_1) %>
+    <%=label_tag(:seed_id_2,"Song 2") %>
+    <%=text_field_tag(:seed_id_2) %>
+    <%=label_tag(:seed_id_3,"Song 3") %>
+    <%=text_field_tag(:seed_id_3) %>
+    <%=label_tag(:seed_id_4,"Song 4") %>
+    <%=text_field_tag(:seed_id_4) %>
+    <%=label_tag(:seed_id_5,"Song 5") %>
+    <%=text_field_tag(:seed_id_5) %>
+  </div>
+  <% end %>
+
+  <div>
+    <p>Click Submit to be get your recommendations!</p>
+    <%=submit_tag 'Submit' %>
+  </div>
+  <%end%>
+
+  <% if current_user %>
+  <div>
+    <%= form_tag(display_playlist_path) do |f| %>
+    <h3>Playlist based on Mood</h3>
+    <%= hidden_field_tag(:playlist_type,'playlist') %>
+    <%= label_tag(:mood,"Please select a mood:") %>
+    <%= select_tag(:mood, options_for_select(@mood_choices)) %>
+    <p>Click Submit to be get your recommendations!</p>
+    <%=submit_tag 'Submit' %>
+    <% end %>
+  </div>
+  <% end %>
+
+  <% if current_user && current_user.spotify_refresh_token? %>
+  <div>
+    <%= form_tag(display_playlist_path) do |f| %>
+    <h3>Playlist of your favourite tracks</h3>
+    <%= hidden_field_tag(:playlist_type, 'favourites') %>
+    <p>Click Submit to see play your favourites!</p>
+    <%= submit_tag 'Submit' %>
+    <% end %>
+  </div>
   <% end %>
 </div>
-<% end %>
-
-<% if current_user && current_user.spotify_refresh_token? %>
-<div>
-  <%= form_tag(display_playlist_path) do |f| %>
-  <h3>Playlist of your favourite tracks</h3>
-  <%= hidden_field_tag(:playlist_type, 'favourites') %>
-  <p>Click Submit to see play your favourites!</p>
-  <%= submit_tag 'Submit' %>
-  <% end %>
-</div>
-<% end %>
