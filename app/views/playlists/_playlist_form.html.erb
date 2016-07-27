@@ -1,11 +1,10 @@
-<hr>
+<h3>One of Spotify's mood playlists</h3>
 <div>
   <%= form_tag(display_playlist_path) do |f| %>
-  <h3>Playlist based on Mood</h3>
   <%= hidden_field_tag(:playlist_type,'playlist') %>
-  <%= label_tag(:mood,"Please select a mood:") %>
+  <p><%= label_tag(:mood,"Please select a mood:") %></p>
   <%= select_tag(:mood, options_for_select(@mood_choices)) %>
   <p>Click Submit to be get your recommendations!</p>
-  <%=submit_tag 'Submit' %>
+  <%=submit_tag 'Submit', class: 'btn btn-primary green-btn'%>
   <% end %>
 </div>

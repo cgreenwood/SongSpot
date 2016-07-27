@@ -1,66 +1,30 @@
 <% provide(:title, "My Recommendations") %>
-<div class=" center fixedElement" id="player">
-  <h1 class="pull-left">SongSpot - Playlist</h1>
-  <p><iframe src="https://embed.spotify.com/?uri=spotify:trackset:Tracks:<%= @tracks %>&theme=white" width="640" height="80" frameborder="0" allowtransparency="true"></iframe></p>
-</div>
-<div class="center jumbotron">
-  <h1> </h1>
-  <h2> </h2>
-  <div class=container>
-    <div class=col-md-12>
-      <table class="table lower_table">
-        <thead>
-          <tr>
-            <th>Cover</th>
-            <th>Song Name</th>
-            <th>Artist</th>
-            <th>Album</th>
-            <th>Popularity</th>
-            <th>Save Track</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% if params[:playlist_type] == "songs" %>
-            <% @recommendations['tracks'].each do |e| %>
-              <tr>
-                <td><img src=<%= e["album"]["images"].last["url"] %> alt="rss feed"/></td>
-                <td><%= e["name"] %></td>
-                <td><%= e["artists"].first["name"] %></td>
-                <td><%= e["album"]["name"] %></td>
-                <td><%= e["popularity"] %>/100</td>
-                <td>
-                  <% if current_user && current_user.spotify_refresh_token? %>
-                    <%= tag "input", {value:"+", type: "button", onclick: "add_music('#{e["id"]}')" , class: "btn btn-primary" , id: "#{e['id']}"} %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
+<div class='container'>
+  <div class='center fixedElement dark' id='player'>
+    <h1 class="pull-left">SongSpot - Playlist</h1>
+    <p><iframe src="https://embed.spotify.com/?uri=spotify:trackset:Tracks:<%= @tracks %>&theme=white" width="640" height="80" frameborder="0" allowtransparency="true"></iframe></p>
+  </div>
+  <div class="center jumbotron dark">
+    <h1> </h1>
+    <h2> </h2>
+    <table class="table lower_table">
+      <thead>
+        <tr>
+          <th>Cover</th>
+          <th>Song Name</th>
+          <th>Artist</th>
+          <th>Album</th>
+          <th>Popularity</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if params[:playlist_type] == "songs" %>
+            <%= render 'songs_playlist' %>
           <% elsif params[:playlist_type] == "playlist" %>
-            <% @mood_songs['items'].each do |e| %>
-              <tr>
-                <td><img src=<%= e['track']['album']['images'].third['url'] %> alt='rss feed'/></td>
-                <td><%= e['track']['name'] %></td>
-                <td><%= e['track']['artists'].first['name'] %></td>
-                <td><%= e['track']['album']['name'] %></td>
-                <td><%= e['track']['popularity'] %></td>
-                <td>
-                  <% if current_user && current_user.spotify_refresh_token? %>
-                    <%= tag "input", {value:"+", type: "button", onclick: "add_music('#{e["track"]["id"]}')" , :class=>"btn btn-primary", id: "#{e['track']['id']}" } %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
+            <%= render 'playlist_playlist' %>
           <% elsif params[:playlist_type] == "favourites" %>
-          <% @favourites['items'].each do |e| %>
-            <tr>
-              <td><img src=<%= e["album"]["images"].last["url"] %> alt="rss feed"/></td>
-              <td><%= e["name"] %></td>
-              <td><%= e["artists"].first["name"] %></td>
-              <td><%= e["album"]["name"] %></td>
-              <td><%= e["popularity"] %>/100</td>
-            </tr>
-          <% end %>
-
+            <%= render 'favourites_playlist' %>
           <% end %>
         </tbody>
       </table>
@@ -68,5 +32,4 @@
   <div class=col-md-3 pull-left>
     <!--<iframe src="https://embed.spotify.com/?uri=spotify:trackset:Tracks:<%= @tracks %>&theme=white&view=coverart" frameborder="0" allowtransparency="true" width="600" height="400" frameborder="0" allowtransparency="true"></iframe> -->
   </div>
-</div>
 </div>

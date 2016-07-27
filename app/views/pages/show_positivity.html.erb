@@ -1,62 +1,15 @@
 <% provide(:title, "Positivity Rankings") %>
 <div class="container">
-  <div>
+  <div class='center jumbotron dark'>
     <h1>Positivity</h1>
     <% if current_user && current_user.positivity_score? %>
-    <h3>Your Positivity Score:
-      <%= (current_user.positivity_score * 100).round(2) %>/100
-    </h3>
+    <h3>Your Positivity Score: <%= (current_user.positivity_score * 100).round(2) %>/100</h3>
     <% end %>
   </div>
-
-  <div>
-    <table class="table">
-      <thead>
-        <tr>
-          <tr>
-            <th>Rank</th>
-            <th>Name</th>
-            <th>Positivity Score</th>
-            <th>Old Positivity Score</th>
-            <th>Up <i class="fa fa-arrow-up" aria-hidden="true"></i>/
-              Down <i class="fa fa-arrow-down" aria-hidden="true"></i>/
-              Same <i class="fa fa-arrows-h" aria-hidden="true"></i></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% i = 0 %>
-          <% @users.each do |u| %>
-          <% if u.positivity_score? %>
-            <tr>
-              <td><%= i += 1 %></td>
-              <td><%= u.name %></td>
-              <td><%= (u.positivity_score * 100).round(2) %>/100</td>
-              <% if u.old_positivity_score? %>
-              <td><%= (u.old_positivity_score * 100).round(2) %>/100</td>
-              <% else %>
-              <td>N/A</td>
-              <% end %>
-              <td>
-                <% if u.old_positivity_score? %>
-                <% if u.positivity_score > u.old_positivity_score %>
-                <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                <% elsif u.positivity_score < u.old_positivity_score %>
-                <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                <% elsif u.positivity_score == u.old_positivity_score %>
-                <i class="fa fa-arrows-h" aria-hidden="true"></i>
-                <% end %>
-                <% else %>
-                N/A
-                <% end %>
-              </td>
-            </tr>
-            <% end %>
-            <% end %>
-        </tbody>
-      </table>
-      <% if current_user && current_user.admin? %>
-        <button type="button" class="btn btn-primary">
-          <%= link_to "Send to Slack", slack_path %>
-        </button>
-      <% end %>
+  <%= render 'positivity_table' %>
+  <div class='center jumbotron dark' %>
+    <% if current_user && current_user.admin? %>
+      <%= button_to 'Send to Slack', slack_path, method: :get, class: 'btn btn-primary green-btn' %>
+    <% end %>
+  </div>
 </div>

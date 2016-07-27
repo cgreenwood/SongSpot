@@ -8,6 +8,7 @@ class PlaylistsController < ApplicationController
       end
       @mood_playlists = Playlist.get_mood_playlists
       @mood_choices = @mood_playlists['playlists']['items'].each.map { |e| [e['name'],e['id']]}
+      render 'new'
     else
       flash.now[:notice] = 'Please login or create an account.'
       redirect_to new_user_session_path

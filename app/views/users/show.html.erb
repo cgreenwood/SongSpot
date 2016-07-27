@@ -1,57 +1,53 @@
 <% provide(:title, "My Profile") %>
-<div class="center jumbotron">
-  <h1>My Profile</h1>
+<div class="container">
+  <div class='center jumbotron dark'>
+    <h1>My Profile</h1>
     <p class="pull-left">Hello ,<%= @user.name.split(" ", ).first %>    </p>
-    <button type="button" class="btn btn-primary pull-left">
-  <%= link_to("Edit",edit_user_registration_path) %>
-</button>
-</div>
-<% if current_user && current_user.spotify_refresh_token? %>
-<div>
+    <%= button_to 'Edit', edit_user_registration_path,method: :get, class: 'btn btn-primary green-btn' %>
+  </div>
   <% if @user.positivity_score? %>
-  <p>Your Positivity score is <%= (@user.positivity_score * 100).round(2) %>/100</p>
+    <div class='center jumbotron dark'>
+      <p class='pull-left'>Your Positivity score is <%= (@user.positivity_score * 100).round(2) %>/100</p>
+    </div>
   <% end %>
-  <h2>Your Favourites</h2>
   <% if current_user && current_user.spotify_refresh_token? %>
-  <div>
-    <%= form_tag(display_playlist_path) do |f| %>
-    <%= hidden_field_tag(:playlist_type, 'favourites') %>
-    <%= submit_tag 'Click me to listen to your favourites!*' %>
-    <small>* Will open a new page</small>
-    <% end %>
+    <div class='center jumbotron dark'>
+      <h3>Your Favourites</h3>
+      <div>
+        <%= form_tag(display_playlist_path) do |f| %>
+        <%= hidden_field_tag(:playlist_type, 'favourites') %>
+        <%= submit_tag 'Click me to listen to your favourites!*', class: 'btn btn-primary green-btn' %>
+        <p><small>* Will open a new page</small></p>
+        <% end %>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Cover</th>
+            <th>Song Name</th>
+            <th>Artist</th>
+            <th>Album</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @favourites['items'].each do |e| %>
+            <tr>
+              <td><img src=<%=e['album']["images"].third['url']%> alt="rss feed"/></td>
+              <td><%= e["name"] %></td>
+              <td><%= e['artists'].first['name'] %></td>
+              <td><%= e['album']["name"] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+  <div class='center jumbotron dark'>
+    <h2>Please link your account to Spotify using the button below to see favourite tracks</h2>
+    <div>
+      <p>Link your spotify account below:</p>
+      <%= button_to 'Link to Spotify', link_spotify_user_path(@user), method: :post, class: 'btn btn-primary green-btn' %>
+    </div>
   </div>
   <% end %>
-  <table class="table">
-  <thead>
-    <tr>
-      <th>Cover</th>
-      <th>Song Name</th>
-      <th>Artist</th>
-      <th>Album</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @favourites['items'].each do |e| %>
-    <tr>
-      <td><img src=<%=e['album']["images"].third['url']%> alt="rss feed"/></td>
-      <td><%= e["name"] %></td>
-      <td><%= e['artists'].first['name'] %></td>
-      <td><%= e['album']["name"] %></td>
-    </tr>
-      <% end %>
-  </tbody>
-</table>
-
-<% else %>
-<h2>Please link your account to Spotify using the button below to see favourite tracks</h2>
-<% end %>
-<% if current_user && current_user.spotify_refresh_token? %>
-
-<% else %>
-<div>
-<p>Link your spotify account below (WIP):</p>
-<button type="button" class="btn btn-primary">
-  <%= link_to 'Sign in with Spotify',link_spotify_user_path(@user), method: :post  %>
-</button>
 </div>
-<% end %>

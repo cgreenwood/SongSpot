@@ -1,0 +1,14 @@
+<% @recommendations['tracks'].each do |e| %>
+  <tr>
+    <td><img src=<%= e["album"]["images"].last["url"] %> alt="rss feed"/></td>
+    <td><%= e["name"] %></td>
+    <td><%= e["artists"].first["name"] %></td>
+    <td><%= e["album"]["name"] %></td>
+    <td><%= e["popularity"] %>/100</td>
+    <td>
+      <% if current_user && current_user.spotify_refresh_token? %>
+        <%= tag "input", {value:"+", type: "button", onclick: "add_music('#{e["id"]}')" , class: "btn btn-primary green-btn" , id: "#{e['id']}"} %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

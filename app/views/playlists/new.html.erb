@@ -1,65 +1,34 @@
-
-<div class="container center jumbotron">
+<div class='container'>
   <%= form_tag(display_playlist_path) do |f| %>
-  <%= render 'general_choices' %>
-
-
+  <div class='center jumbotron dark'>
+    <h1>Create a Playlist</h1>
+  </div>
+  <div class='center jumbotron dark'>
+    <h3>Step 1 - Choose number of songs and popularity</h3>
+  </div>
+  <div class='center jumbotron dark'>
+    <%= render 'general_choices' %>
+  </div>
+  <div class='center jumbotron dark'>
+    <h3>Step 2 - Choose the type of playlist and hit Submit</h3>
+  </div>
   <% if current_user && current_user.spotify_refresh_token? %>
-    <%= render 'favourites_choice' %>
-    <%= render 'submit_button' %>
-
-  <% else %>
-
-  <%= render 'enter_song' %>
-  <%= render 'submit_button' %>
-
-  <% end %>
-
-
-  <%end%>
-
-  <% if current_user %>
-  <%= render 'playlist_form' %>
-  <% end %>
-  <% if current_user && current_user.spotify_refresh_token? %>
-  <%= render 'favourites_form' %>
-  <% end %>
-</div>
-
-<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-        Favourites Choice</a>
-      </h4>
-    </div>
-    <div id="collapse1" class="panel-collapse collapse in">
+    <div class='center jumbotron dark'>
       <%= render 'favourites_choice' %>
       <%= render 'submit_button' %>
     </div>
+  <% end %>
+  <div class='center jumbotron dark'>
+    <%= render 'enter_song' %>
+    <%= render 'submit_button' %>
   </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-        Enter Songs</a>
-      </h4>
-    </div>
-    <div id="collapse2" class="panel-collapse collapse">
-      <%= render 'enter_song' %>
-      <%= render 'submit_button' %>
-    </div>
+  <% end %>
+  <div class='center jumbotron dark'>
+      <%= render 'playlist_form' %>
   </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-        Playlist of Favourites</a>
-      </h4>
-    </div>
-    <div id="collapse3" class="panel-collapse collapse">
+  <% if current_user && current_user.spotify_refresh_token? %>
+    <div class='center jumbotron dark'>
       <%= render 'favourites_form' %>
     </div>
-  </div>
+  <% end %>
 </div>

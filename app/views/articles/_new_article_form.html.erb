@@ -1,0 +1,23 @@
+<div class='container'>
+  <div class='center jumbotron dark'>
+    <h1>New Article</h1>
+  </div>
+
+  <div class='center jumbotron dark'>
+    <%= form_for :article, url: articles_path do |f| %>
+
+    <div class="field">
+      <p class= 'pull-left'><%= f.label :title %></p>
+      <%= f.text_field :title, {class: 'grey-text-area'}%>
+    </div>
+
+    <div class="field">
+      <p class='pull-left'><%= f.label :text %></p>
+      <%= f.text_area :text, {class: 'grey-text-area', rows: '10'}%>
+    </div>
+    <%= f.submit "Create", class: 'btn btn-primary green-btn',
+                           data: {confirm: 'Are you sure you want to save these changes?'} %>
+    <% end %>
+  </div>
+</div>
+</div>

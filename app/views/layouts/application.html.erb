@@ -7,7 +7,7 @@
     <%= render 'layouts/shim' %>
     <%= Gon::Base.render_data %>
   </head>
-  <body>
+  <body data-no-turbolink="true">
     <%= render 'layouts/header' %>
     <div class="container">
       <% flash.each do |message_type, message| %>
