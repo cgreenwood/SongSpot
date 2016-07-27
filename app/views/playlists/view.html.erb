@@ -30,7 +30,7 @@
                 <td><%= e["popularity"] %>/100</td>
                 <td>
                   <% if current_user && current_user.spotify_refresh_token? %>
-                    <%= tag "input", {value:"+", type: "button", onclick: "add_music('#{e["id"]}')" , :class=>"btn btn-primary" , :id=>"#{e['id']}"} %>
+                    <%= tag "input", {value:"+", type: "button", onclick: "add_music('#{e["id"]}')" , class: "btn btn-primary" , id: "#{e['id']}"} %>
                   <% end %>
                 </td>
               </tr>
@@ -45,7 +45,7 @@
                 <td><%= e['track']['popularity'] %></td>
                 <td>
                   <% if current_user && current_user.spotify_refresh_token? %>
-                    <%= tag "input", {value:"+", type: "button", onclick: "add_music('#{e["track"]["id"]}')" , :class=>"btn btn-primary"} %>
+                    <%= tag "input", {value:"+", type: "button", onclick: "add_music('#{e["track"]["id"]}')" , :class=>"btn btn-primary", id: "#{e['track']['id']}" } %>
                   <% end %>
                 </td>
               </tr>

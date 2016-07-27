@@ -1,0 +1,19 @@
+<h3>Playlist based on Songs</h3>
+<div class=container>
+  <strong><%= label_tag(:limit,"Number of tracks:") %></strong>
+  <p>This is the number of songs you want recommended to you. Between 1 and 100</p>
+  <p>This field can be left blank and will default to 20 songs.</p>
+  <%= number_field_tag(:limit, options = {:min => 1,:max => 100}) %>
+
+</div>
+
+<div>
+  <%= label_tag(:min_pop,"Minimum popularity:") %>
+  <p>Number between 1 and 100 where 100 is most popular. A higher number will give you songs more people listen to on Spotify.</p>
+  <p>This field can be left blank and will default to 50 which is average popularity.</p>
+  <%= number_field_tag(:min_pop, options = {:min => 1, :max => 100}) %>
+</div>
+
+<%= hidden_field_tag(:playlist_type,'songs') %>
+
+<%= hidden_field_tag(:market,"GB") %>

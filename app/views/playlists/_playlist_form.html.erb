@@ -1,0 +1,11 @@
+<hr>
+<div>
+  <%= form_tag(display_playlist_path) do |f| %>
+  <h3>Playlist based on Mood</h3>
+  <%= hidden_field_tag(:playlist_type,'playlist') %>
+  <%= label_tag(:mood,"Please select a mood:") %>
+  <%= select_tag(:mood, options_for_select(@mood_choices)) %>
+  <p>Click Submit to be get your recommendations!</p>
+  <%=submit_tag 'Submit' %>
+  <% end %>
+</div>
