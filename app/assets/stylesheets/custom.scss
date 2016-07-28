@@ -9,38 +9,46 @@
   box-sizing:         border-box;
 }
 
+.oldColour {
+  color: #08c11e;
+}
+
+.content {
+  display: none;
+}
+
 .dark {
   background-color: #3b3e3e;
   p {
-    color: #08c11e;
+    color: #fff;
   }
 
   h1 {
-    color: #08c11e;
+    color: #fff;
   }
 
   h2 {
-    color: #08c11e;
+    color: #fff;
   }
 
   h3 {
-    color: #08c11e;
+    color: #fff;
   }
 
   small {
-    color: #08c11e;
+    color: #fff;
   }
 
   em {
-    color: #08c11e;
+    color: #fff;
   }
 
   th {
-    color: #08c11e;
+    color: #fff;
   }
 
   td {
-    color: #08c11e;
+    color: #fff;
   }
 
   .grey-text-area {
