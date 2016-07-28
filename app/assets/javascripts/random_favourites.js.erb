@@ -1,0 +1,15 @@
+$(document).on('turbolinks:load', function() {
+  $('#reload').on('click', function(event) {
+    event.preventDefault();
+    $('.favourites').each(function() {
+      var choice = getRandomInt(1,50);
+      option = $($(this).find('option')[choice]).val();
+      $(this).val(option);
+    });
+
+  });
+});
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
