@@ -2,14 +2,14 @@
 <div class="container">
   <div class='center jumbotron dark'>
     <h1>My Profile</h1>
-    <p class="pull-left">Hello ,<%= @user.name.split(" ", ).first %>    </p>
-    <%= button_to 'Edit', edit_user_registration_path,method: :get, class: 'btn btn-primary green-btn' %>
   </div>
-  <% if @user.positivity_score? %>
-    <div class='center jumbotron dark'>
-      <p class='pull-left'>Your Positivity score is <%= (@user.positivity_score * 100).round(2) %>/100</p>
-    </div>
-  <% end %>
+  <div class='center jumbotron dark'>
+    <p class="pull-left">Hello <%= @user.name.split(" ", ).first %>!</p>
+    <%= button_to 'Edit', edit_user_registration_path,method: :get, class: 'pull-right btn btn-primary green-btn' %>
+    <% if @user.positivity_score? %>
+      <p>Your Positivity score is <%= (@user.positivity_score * 100).round(2) %>/100</p>
+    <% end %>
+  </div>
   <% if current_user && current_user.spotify_refresh_token? %>
     <div class='center jumbotron dark'>
       <h3>Your Favourites</h3>
