@@ -85,7 +85,7 @@ class Playlist
 
   def self.get_mood_playlists
     token = authorize
-    response = RestClient.get "https://api.spotify.com/v1/browse/categories/mood/playlists",
+    response = RestClient.get "https://api.spotify.com/v1/browse/categories/mood/playlists?limit=50",
                               'Authorization' => "Bearer #{token}"
     data = JSON.parse(response)
   end
