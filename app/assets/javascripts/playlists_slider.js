@@ -1,11 +1,10 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load',(function() {
   console.log("File loaded");
-  $('.header').click(function(){
+  $('.header').on('click', function() {
     if ($(this).next('.content').is(':visible')) {
       $(this).next('.content').slideUp();
-    }
-    else {
+    } else {
       $(this).next('.content').slideDown();
     }
   });
-})
+}));
