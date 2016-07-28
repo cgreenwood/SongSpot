@@ -2,13 +2,18 @@
 <p>These songs will be what the recommendations are based on</p>
 <div>
   <p><%= label_tag(:seed_id_1,"Song 1") %></p>
-  <%= select_tag(:seed_id_1, options_for_select(@song_choices)) %>
+  <% option = rand(1..50) %>
+  <%= select_tag(:seed_id_1, options_for_select(@song_choices,@song_choices[option])) %>
   <p><%= label_tag(:seed_id_2,"Song 2") %></p>
-  <%= select_tag(:seed_id_2, options_for_select(@song_choices)) %>
+  <% option = rand(1..50) %>
+  <%= select_tag(:seed_id_2, options_for_select(@song_choices,@song_choices[option])) %>
   <p><%= label_tag(:seed_id_3,"Song 3") %></p>
-  <%= select_tag(:seed_id_3, options_for_select(@song_choices)) %>
+  <% option = rand(1..50) %>
+  <%= select_tag(:seed_id_3, options_for_select(@song_choices,@song_choices[option])) %>
   <p><%= label_tag(:seed_id_4,"Song 4") %></p>
-  <%= select_tag(:seed_id_4, options_for_select(@song_choices)) %>
+  <% option = rand(1..50) %>
+  <%= select_tag(:seed_id_4, options_for_select(@song_choices,@song_choices[option])) %>
   <p><%= label_tag(:seed_id_5,"Song 5") %></p>
-  <%= select_tag(:seed_id_5, options_for_select(@song_choices)) %>
+  <% option = rand(1..50) %>
+  <%= select_tag(:seed_id_5, options_for_select(@song_choices,@song_choices[option])) %>
 </div>
