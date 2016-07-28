@@ -1,10 +1,12 @@
 <p><strong><%= label_tag(:limit,"Number of tracks:") %></strong></p>
-<p>This is the number of songs you want recommended to you. Between 1 and 100</p>
-<p>This field can be left blank and will default to 20 songs.</p>
-<%= number_field_tag(:limit) %>
+<p>This is the number of songs you want recommended to you. Between 1 and 100.</p>
+<p id='limit-value'>Current Value is : 50</p>
+<%= range_field_tag(:limit, :in => 1..100, :step => '1') %>
+<p class='pull-left'>0</p><p class='pull-right'>100</p>
 <p><strong><%= label_tag(:min_pop,"Minimum popularity:") %></strong></p>
-<p>Number between 1 and 100 where 100 is most popular. A higher number will give you songs more people listen to on Spotify.</p>
-<p>This field can be left blank and will default to 50 which is average popularity.</p>
-<%= number_field_tag(:min_pop) %>
+<p>Number between 1 and 100 where 100 is most popular. A higher number will give you songs more people listen to on Spotify. Although higher numbers may give you less songs than you request.</p>
+<p id='pop-value'>Current Value is : 50</p>
+<%= range_field_tag(:min_pop, :in => 1..100, :step => '1') %>
+<p class='pull-left'>Not very popular</p><p class='pull-right'>Very popular</p>
 <%= hidden_field_tag(:playlist_type,'songs') %>
 <%= hidden_field_tag(:market,"GB") %>
