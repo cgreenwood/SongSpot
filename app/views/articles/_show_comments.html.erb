@@ -6,7 +6,7 @@
     <p><strong><%= comment.user.name %></strong></p>
     <p><%= comment.body %></p>
     <% if current_user && current_user.admin? %>
-      <%= button_to 'X', article_comment_path(@article),
+      <%= button_to 'X', article_comment_path(comment.article, comment),
                          { method: :delete,
                            class: 'btn btn-primary green-btn pull-right',
                            data: {confirm: 'Are you sure you want to delete your comment?'}}%>

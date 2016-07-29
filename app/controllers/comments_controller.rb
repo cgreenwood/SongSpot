@@ -13,7 +13,8 @@ class CommentsController < ApplicationController
 
   def destroy
     if current_user && current_user.admin?
-      @comment = Comment.find(params[:id])
+      @article = Article.find(params[:article_id])
+      @comment = @article.comments.find(params[:id])
       @comment.destroy
       redirect_to article_path(@article)
     end

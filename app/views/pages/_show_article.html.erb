@@ -6,6 +6,8 @@
       <small>Created by <%= article.user.name %> at <%= article.created_at %></small>
     </div>
     <div>
+      <p><%= article.comments.count %> comments.</p>
+    <div>
       <%= button_to 'View', article_path(article), { method: :get, class: "btn btn-primary green-btn" } %>
       <% if current_user && current_user.admin? %>
         <%= button_to 'Modify', edit_article_path(article), { method: :get, class: "btn btn-primary green-btn"} %>
