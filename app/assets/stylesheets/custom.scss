@@ -21,17 +21,29 @@
   background-color: #3b3e3e;
   p {
     color: #fff;
+    font-size: 1.3em;
   }
 
   h1 {
-    color: #fff;
+    color: #08c11e;
   }
 
   h2 {
-    color: #fff;
+    color: #08c11e;
+    font-size: 2.5em;
   }
 
   h3 {
+    color: #08c11e;
+    font-size: 2em;
+  }
+
+  small {
+    color: #fff;
+    font-size: 1em;
+  }
+
+  em {
     color: #fff;
   }
 
@@ -39,12 +51,8 @@
     color: #fff;
   }
 
-  em {
-    color: #fff;
-  }
-
   th {
-    color: #fff;
+    color: #08c11e;
   }
 
   td {
@@ -115,6 +123,7 @@
 body {
   padding-top: 60px;
   background-color: #676b6b;
+  font-family: 'Open Sans', sans-serif;
 }
 
 section {

@@ -3,9 +3,11 @@
   <marquee class='center dark'><p>WARNING - Due to changes to the Application's permission's please relink your acccount to Spotify from the user page. - WARNING </p></marquee>
   <div class="center jumbotron dark">
     <h1>Welcome to SongSpot</h1>
-    <h2>This is the home page for the SongSpot application.</h2>
+    <p>This is the home page for the SongSpot application.<p>
   </div>
   <%= render 'show_article' %>
 <% if current_user && current_user.admin? %>
-  <%= button_to 'New Article', new_article_path, { method: :get, class: 'btn btn-primary blue-btn' } %>
+<div class='center jumbotron dark'>
+  <%= button_to 'New Article', new_article_path, { method: :get, class: 'btn btn-primary green-btn' } %>
+</div>
 <% end %>

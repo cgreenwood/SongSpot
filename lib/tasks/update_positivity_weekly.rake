@@ -2,7 +2,7 @@ desc "Update each users Positivity Score. Run weekly"
 task :update_positivity_weekly => :environment do
   User.all.each do |u|
     if u.spotify_refresh_token?
-      favourites = User.get_user_favourite_tracks(u.spotify_refresh_token)
+      favourites = User.get_user_favourite_tracks_short(u.spotify_refresh_token)
       track_ids = []
       favourites['items'].each do |e|
         track_ids << e['id']
