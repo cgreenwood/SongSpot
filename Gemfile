@@ -53,6 +53,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'dotenv-rails'
   gem 'foreman'
+  gem 'pry'
 end
 
 group :development do
@@ -74,6 +75,11 @@ group :test do
   gem 'minitest-reporters',       '1.1.9'
   gem 'guard',                    '2.13.0'
   gem 'guard-minitest',           '2.4.4'
+  gem 'capybara', '~> 2.4.0'
+  gem 'database_cleaner'
+  gem 'cucumber-rails', require: false
+  gem 'cucumber'
+
 end
 
 group :production do

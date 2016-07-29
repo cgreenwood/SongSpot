@@ -20,6 +20,7 @@
     <div class='center jumbotron dark content' id='favourites'>
       <button class='btn btn-primary green-btn' id='reload'>Randomize</button>
       <%= render 'favourites_choice' %>
+      <%= hidden_field_tag(:playlist_type,'favourites') %>
       <%= render 'submit_button' %>
     </div>
   <% end %>
@@ -28,6 +29,7 @@
   </div>
   <div class='center jumbotron dark content'>
     <%= render 'enter_song' %>
+    <%= hidden_field_tag(:playlist_type,'songs') %>
     <%= render 'submit_button' %>
   </div>
   <% end %>
