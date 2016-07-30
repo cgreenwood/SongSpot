@@ -18,6 +18,7 @@ class PlaylistsController < ApplicationController
     if current_user
       begin
         if params[:playlist_type] == 'songs'
+            Rails.logger.debug @song_choices
             @recommendations = Playlist.generate_song_playlist(params)
             @tracks = Playlist.extract_tracks(@recommendations)
             if current_user.spotify_refresh_token?
