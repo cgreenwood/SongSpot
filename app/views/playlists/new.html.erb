@@ -7,18 +7,7 @@
     <h3>Step 1 - Choose number of songs and popularity</h3>
   </div>
   <div class='center jumbotron dark'>
-    <p><strong><%= label_tag(:limit,"Number of tracks:") %></strong></p>
-    <p>This is the number of songs you want recommended to you. Between 1 and 100.</p>
-    <p id='limit-value'>Current Value is : 50</p>
-    <%= range_field_tag(:limit, :in => 1..100, :step => '1') %>
-    <p class='pull-left'>0</p><p class='pull-right'>100</p>
-    <p><strong><%= label_tag(:min_pop,"Minimum popularity:") %></strong></p>
-    <p>Number between 1 and 100 where 100 is most popular. A higher number will give you songs more people listen to on Spotify. Although higher numbers may give you less songs than you request.</p>
-    <p id='pop-value'>Current Value is : 50</p>
-    <%= range_field_tag(:min_pop, :in => 1..100, :step => '1') %>
-    <p class='pull-left'>Not very popular</p><p class='pull-right'>Very popular</p>
-    <%= hidden_field_tag(:playlist_type,'songs') %>
-    <%= hidden_field_tag(:market,"GB") %>
+    <%= render 'general_choices' %>
 
   </div>
   <div class='center jumbotron dark'>
@@ -31,20 +20,7 @@
     </div>
     <div class='center jumbotron dark content' id='favourites'>
       <button class='btn btn-primary green-btn' id='reload'>Randomize</button>
-      <p>Choose songs from your favourite list.</p>
-      <p>These songs will be what the recommendations are based on</p>
-      <div>
-        <p><%= label_tag(:seed_id_1,"Song 1") %></p>
-        <%= select_tag(:seed_id_1, options_for_select(@song_choices)) %>
-        <p><%= label_tag(:seed_id_2,"Song 2") %></p>
-        <%= select_tag(:seed_id_2, options_for_select(@song_choices),class: 'favourites') %>
-        <p><%= label_tag(:seed_id_3,"Song 3") %></p>
-        <%= select_tag(:seed_id_3, options_for_select(@song_choices),class: 'favourites') %>
-        <p><%= label_tag(:seed_id_4,"Song 4") %></p>
-        <%= select_tag(:seed_id_4, options_for_select(@song_choices),class: 'favourites') %>
-        <p><%= label_tag(:seed_id_5,"Song 5") %></p>
-        <%= select_tag(:seed_id_5, options_for_select(@song_choices),class: 'favourites') %>
-      </div>
+      <%= render 'favourites_choice' %>
       <%= hidden_field_tag(:playlist_type,'songs') %>
       <div>
         <p>Click Submit to be get your recommendations!</p>
@@ -57,29 +33,7 @@
       <h3>Enter Song URI's</h3>
     </div>
     <div class='center jumbotron dark content'>
-      <div>
-        <p>Copy Song URI:</p>
-        <small>At least one of these is required.</small>
-        <small>If none entered default will be "Rick Astley - Never Gonna Give You Up"</small>
-        <ol>
-          <li><p>Open Spotify</p></li>
-          <li><p>Right click on a song</p></li>
-          <li><p>Click on "Copy Spotify URI"</p></li>
-        </ol>
-
-      </div>
-        <div>
-          <p><%=label_tag(:seed_id_1,"Song 1") %></p>
-          <%=text_field_tag(:seed_id_1) %>
-          <p><%=label_tag(:seed_id_2,"Song 2") %></p>
-          <%=text_field_tag(:seed_id_2) %>
-          <p><%=label_tag(:seed_id_3,"Song 3") %></p>
-          <%=text_field_tag(:seed_id_3) %>
-          <p><%=label_tag(:seed_id_4,"Song 4") %></p>
-          <%=text_field_tag(:seed_id_4) %>
-          <p><%=label_tag(:seed_id_5,"Song 5") %></p>
-          <%=text_field_tag(:seed_id_5) %>
-      </div>
+      <%= render 'enter_song' %>
       <div>
         <p>Click Submit to be get your recommendations!</p>
         <%=submit_tag 'Submit', class: 'btn btn-primary green-btn' %>

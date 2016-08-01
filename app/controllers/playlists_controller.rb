@@ -18,7 +18,6 @@ class PlaylistsController < ApplicationController
     if current_user
       begin
         if params[:playlist_type] == 'songs'
-            Rails.logger.debug @song_choices
             @recommendations = Playlist.generate_song_playlist(params)
             @tracks = Playlist.extract_tracks(@recommendations)
             if current_user.spotify_refresh_token?
@@ -34,11 +33,7 @@ class PlaylistsController < ApplicationController
             render 'view'
         elsif params[:playlist_type] == 'favourites'
           @favourites = User.get_user_favourite_tracks(current_user.spotify_refresh_token)
-          Rails.logger.debug "Before extraction"
-          Rails.logger.debug @favourites
           @tracks = Playlist.extract_favourites_tracks(@favourites)
-          Rails.logger.debug "Extracted tracks"
-          Rails.logger.debug @tracks
           if current_user.spotify_refresh_token?
             @token = Playlist.get_spotify_access_token(current_user.spotify_refresh_token)
           end
