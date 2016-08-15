@@ -1,0 +1,15 @@
+- provide(:title, "Home")
+.container
+  - if current_user
+    %marquee.center.dark
+      %p WARNING - Due to changes to the Application's permission's please relink your acccount to Spotify from the user page. - WARNING
+  - else
+    %marquee.center.dark
+      %p Welcome to the SongSpot application
+  .center.jumbotron.dark
+    %h1 Welcome to SongSpot
+    %p This is the home page for the SongSpot application.
+  = render 'show_article'
+  - if current_user && current_user.admin?
+    .center.jumbotron.dark
+      = button_to 'New Article', new_article_path, {method: :get, class: 'btn btn-primary green-btn'}

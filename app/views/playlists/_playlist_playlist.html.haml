@@ -1,0 +1,11 @@
+- @mood_songs['items'].each do |e|
+  %tr
+    %td
+      %img{:src => "#{e['track']['album']['images'].third['url']}", :alt => 'rss feed'}
+    %td= e['track']['name']
+    %td= e['track']['artists'].first['name']
+    %td= e['track']['album']['name']
+    %td= e['track']['popularity']
+    %td
+      - if current_user && current_user.spotify_refresh_token
+        =tag 'input', {value: '+', type: 'button', onclick: "add_music('#{e['track']['id']}')", class: 'btn btn-primary green-btn', id: "#{e['track']['id']}"}

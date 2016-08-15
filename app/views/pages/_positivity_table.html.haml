@@ -1,0 +1,39 @@
+.center.jumbotron.dark
+  %table.table
+    %thead
+      %tr
+        %th Rank
+        %th Name
+        %th Positivity Score
+        %th Old Positivity Score
+        %th
+          Up
+          %i.fa.fa-arrow-up{'aria-hidden' => 'true'}
+          = succeed '/' do
+            Down
+            %i.fa.fa-arrow-down{'aria-hidden' => 'true'}
+          = succeed '/' do
+            Same
+            %i.fa.fa-arrows-h{'aria-hidden' => 'true'}
+    %tbody
+      - i = 0
+      - @users.each do |u|
+        - if u.positivity_score?
+          %tr
+            %td=i += 1
+            %td=u.name
+            %td #{(u.positivity_score * 100).round(2)}/100
+            - if u.old_positivity_score?
+              %td #{(u.old_positivity_score * 100).round(2)}/100
+            - else
+              %td N/A
+            %td
+              - if u.old_positivity_score?
+                - if u.positivity_score > u.old_positivity_score
+                  %i.fa.fa-arrow-up{'aria-hidden' => 'true'}
+                - elsif u.positivity_score < u.old_positivity_score
+                  %i.fa.fa-arrow-down{'aria-hidden' => 'true'}
+                - elsif u.positivity_score == u.old_positivity_score
+                  %i.fa.fa-arrows-h{'aria-hidden' => 'true'}
+              - else
+                N/A

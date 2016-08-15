@@ -1,0 +1,7 @@
+%div
+  = form_tag(display_playlist_path) do |f|
+    = hidden_field_tag(:playlist_type,'playlist')
+    %p=label_tag(:mood,'Please select a mood:')
+    = select_tag(:mood, options_for_select(@mood_choices,@mood_choices[(rand(1..30))]))
+    %p Click Submit to get your recommendations!
+    = submit_tag 'Submit', class: 'btn btn-primary green-btn'

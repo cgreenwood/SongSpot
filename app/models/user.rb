@@ -98,48 +98,51 @@ class User < ApplicationRecord
   end
 
   def self.get_user_favourite_tracks_short(user_refresh_token)
-    token = Playlist.get_spotify_access_token(user_refresh_token)
-    base64 = Base64.urlsafe_encode64(ENV['SPOTIFY_CLIENT_ID'] + ':' +
-                                     ENV['SPOTIFY_SECRET_ID'])
-    # For top tracks use /top/tracks but first get user-top-read
-    response = RestClient.get 'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term',
-                              'Authorization' => "Bearer #{token}"
-
-    data = JSON.parse(response)
-    i = 0
-    data['items'].each do |e|
-      i += 1
-    end
-    if i < 25
-      response = RestClient.get 'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term',
+    unless user_refresh_token.nil?
+      token = Playlist.get_spotify_access_token(user_refresh_token)
+      base64 = Base64.urlsafe_encode64(ENV['SPOTIFY_CLIENT_ID'] + ':' +
+                                       ENV['SPOTIFY_SECRET_ID'])
+      # For top tracks use /top/tracks but first get user-top-read
+      response = RestClient.get 'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term',
                                 'Authorization' => "Bearer #{token}"
       data = JSON.parse(response)
+      i = 0
+      data['items'].each do |e|
+        i += 1
+      end
+      if i < 25
+        response = RestClient.get 'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term',
+                                  'Authorization' => "Bearer #{token}"
+        data = JSON.parse(response)
+      end
+      return data
     end
-    return data
   end
 
 
 
   def self.get_user_favourite_tracks(user_refresh_token)
-    token = Playlist.get_spotify_access_token(user_refresh_token)
-    base64 = Base64.urlsafe_encode64(ENV['SPOTIFY_CLIENT_ID'] + ':' +
-                                     ENV['SPOTIFY_SECRET_ID'])
+    unless user_refresh_token.nil?
+      token = Playlist.get_spotify_access_token(user_refresh_token)
+      base64 = Base64.urlsafe_encode64(ENV['SPOTIFY_CLIENT_ID'] + ':' +
+                                      ENV['SPOTIFY_SECRET_ID'])
     # For top tracks use /top/tracks but first get user-top-read
-    response = RestClient.get 'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term',
+      response = RestClient.get 'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term',
                               'Authorization' => "Bearer #{token}"
 
-    data = JSON.parse(response)
-    i = 0
-    data['items'].each do |e|
-      i += 1
-    end
-    if i < 25
-      response = RestClient.get 'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term',
-                                'Authorization' => "Bearer #{token}"
       data = JSON.parse(response)
-    end
+      i = 0
+      data['items'].each do |e|
+        i += 1
+      end
+      if i < 25
+        response = RestClient.get 'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term',
+                                  'Authorization' => "Bearer #{token}"
+        data = JSON.parse(response)
+      end
 
-    return data
+      return data
+    end
   end
 
   def self.get_audio_features_of_favourites(track_ids)

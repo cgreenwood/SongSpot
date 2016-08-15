@@ -1,0 +1,14 @@
+
+%p Choose songs from your favourites list.
+%p These songs will be what the recommendations are based on
+%div
+  %p= label_tag(:seed_id_1,'Song 1')
+  = select_tag(:seed_id_1, options_for_select(@song_choices,@song_choices[(rand(1..50))]),class: 'favourites grey-text-area form-control')
+  %p= label_tag(:seed_id_2,'Song 2')
+  = select_tag(:seed_id_2, options_for_select(@song_choices,@song_choices[(rand(1..50))]),class: 'favourites grey-text-area form-control')
+  %p= label_tag(:seed_id_3,'Song 3')
+  = select_tag(:seed_id_3, options_for_select(@song_choices,@song_choices[(rand(1..50))]),class: 'favourites grey-text-area form-control')
+  %p= label_tag(:seed_id_4,'Song 4')
+  = select_tag(:seed_id_4, options_for_select(@song_choices,@song_choices[(rand(1..50))]),class: 'favourites grey-text-area form-control')
+  %p= label_tag(:seed_id_5, 'Song 5')
+  = select_tag(:seed_id_5, options_for_select(@song_choices,@song_choices[(rand(1..50))]),class: 'favourites grey-text-area form-control')

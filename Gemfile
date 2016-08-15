@@ -11,6 +11,9 @@ gem 'http-cookie', '~> 1.0', '>= 1.0.2'
 gem 'mime-types', '2.99.2'
 gem 'netrc', '~> 0.11.0'
 
+gem 'haml'
+gem 'haml-rails', '~> 0.9.0'
+
 gem 'gon', '~> 6.1'
 
 # Use Bootstrap

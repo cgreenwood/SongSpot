@@ -1,0 +1,38 @@
+.container
+  = form_tag(display_playlist_path) do |f|
+    .center.jumbotron.dark
+      %h1 Create a Playlist
+    .center.jumbotron.dark
+      %h3 Step 1 - Choose the number of songs and popularity
+    .center.jumbotron.dark
+      = render 'general_choices'
+    .center.jumbotron.dark
+      %h3 Step 2 - Choose the type of playlist and click Submit
+      %p Click one of the options below
+    - if current_user && current_user.spotify_refresh_token?
+      .center.dark.header
+        %h3 Use some of your favourites
+      #favourites.center.jumbotron.dark.content
+        %button#reload.btn.btn-primary.green-btn Randomize
+        = render 'favourites_choice'
+        = hidden_field_tag(:playlist_type, 'songs')
+        %div
+          %p Click Submit to get your recommendations!
+          =submit_tag 'Submit', class: 'btn btn-primary green-btn'
+    - else
+      .center.dark.header
+        %h3 Enter Song URI's
+      .center.jumbotron.dark.content
+        = render 'enter_song'
+        %div
+          %p Click Submit to get your recommendations!
+          = submit_tag 'Submit', class: 'btn btn-primary green-btn'
+  .center.dark.header
+    %h3 Choose a Spotify Mood Playlist
+  .center.jumbotron.dark.content
+    = render 'playlist_form'
+  - if current_user && current_user.spotify_refresh_token?
+    .center.dark.header
+      %h3 Listen to your favourties
+    .center.jumbotron.dark.content
+      = render 'favourites_form'

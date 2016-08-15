@@ -1,0 +1,25 @@
+- provide(:title, "My Recommendations")
+.container
+  #player.center.fixedElement.dark
+    %h1.pull-left SongSpot - Playlist
+    %p
+      %iframe{:allowtransparency => "true", :frameborder => "0", :height => "80", :src => "https://embed.spotify.com/?uri=spotify:trackset:Tracks:#{@tracks}=white", :width => "640"}
+  .center.jumbotron.dark
+    %h1
+    %h2
+    %table.table.lower_table
+      %thead
+        %tr
+          %th Cover
+          %th Song Name
+          %th Artist
+          %th Album
+          %th Popularity
+          %th
+      %tbody
+        - if params[:playlist_type] == "songs"
+          = render 'songs_playlist'
+        - elsif params[:playlist_type] == "playlist"
+          = render 'playlist_playlist'
+        - elsif params[:playlist_type] == "favourites"
+          = render 'favourites_playlist'

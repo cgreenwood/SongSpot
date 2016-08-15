@@ -1,0 +1,20 @@
+%div
+  %p Copy Song URI:
+  %small At least one of these is required.
+  %small If none entered default will be 'Rick Astley - Never Gonna Give You Up'
+  %ol
+    %li Open Spotify
+    %li Right click on a song
+    %li Click on 'Copy Spotify URI'
+%div
+  %p
+    %label_tag(:seed_id_1,'Song 1')
+  = text_field_tag(:seed_id_1)
+  %p= label_tag(:seed_id_2,'Song 2')
+  = text_field_tag(:seed_id_2)
+  %p= label_tag(:seed_id_3,'Song 3')
+  = text_field_tag(:seed_id_3)
+  %p= label_tag(:seed_id_4,'Song 4')
+  = text_field_tag(:seed_id_4)
+  %p= label_tag(:seed_id_5,'Song 5')
+  = text_field_tag(:seed_id_5)

@@ -1,0 +1,15 @@
+.container
+  .center.jumbotron.dark
+    %h1
+      %strong Title:
+      = @article.title
+  .center.jumbotron.dark
+    %p
+      %strong Contents:
+      %br/
+      = @article.text
+    %small
+      Created by #{@article.user.name} at #{@article.created_at}
+    - if current_user && current_user.admin?
+      = button_to 'Modify', edit_article_path(@article), {method: :get, class: 'btn btn-primary green-btn'}
+      = button_to 'Delete', article_path(@article), { method: :delete, class: 'btn btn-primary green-btn', data: {confirm: 'Are you sure you want to delete this article?'}}

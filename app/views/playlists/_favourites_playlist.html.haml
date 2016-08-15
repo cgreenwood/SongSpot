@@ -1,0 +1,8 @@
+- @favourites['items'].each do |e|
+  %tr
+    %td
+      %img{:src => "#{e['album']['images'].last['url']}", :alt => 'rss feed'}
+    %td= e['name']
+    %td= e['artists'].first['name']
+    %td= e['album']['name']
+    %td #{e['popularity']}/100

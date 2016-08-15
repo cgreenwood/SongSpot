@@ -1,0 +1,21 @@
+.container
+  .center.jumbotron.dark
+    %h1 Report a bug
+  .center.jumbotron.dark
+    = form_for :bug, url: bugs_path do |f|
+      - if @bug.errors.any?
+        #error_explanation
+          %ul.pull-left
+            - @bug.errors.full_messages.each do |msg|
+              %li= msg
+      .field
+        %p.pull-left= f.label :title
+        = f.text_field :title, {class: 'grey-text-area'}
+      .field
+        %p.pull-left= f.label :type
+        = f.select(:bug_type, ["Playlist creation","User registration","Site navigation", |
+          "Report a bug"])                                                                |
+      .field
+        %p.pull-left= f.label :content
+        = f.text_area :content, {class: 'grey-text-area',rows: '5'}
+      = f.submit 'Create', class: 'btn btn-primary green-btn'

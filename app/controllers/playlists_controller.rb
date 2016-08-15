@@ -73,5 +73,6 @@ class PlaylistsController < ApplicationController
     rescue => e
       Rails.logger.debug e.response
     end
+    render :nothing => true
   end
 end

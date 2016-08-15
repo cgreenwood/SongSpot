@@ -1,12 +1,13 @@
 $(document).on('turbolinks:load', function() {
   $('#reload').on('click', function(event) {
     event.preventDefault();
+    console.log('Randomize clicked')
     $('.favourites').each(function() {
       var choice = getRandomInt(1,50);
       option = $($(this).find('option')[choice]).val();
       $(this).val(option);
     });
-
+    console.log('Finished randomizing');
   });
 });
 

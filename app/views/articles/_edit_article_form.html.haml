@@ -1,0 +1,12 @@
+.container
+  .center.jumbotron.dark
+    %h1 Edit Article
+  .center.jumbotron.dark
+    =form_for :article, url: article_path(@article), method: :patch do |f|
+      .field
+        %p.pull-left=f.label :title
+        = f.text_field :title, {class: 'grey-text-area form-control'}
+      .field
+        %p.pull-left=f.label :title
+        =f.text_area :text, {class: 'grey-text-area form-control', rows: '10'}
+      =f.submit 'Update', class: 'btn btn-primary green-btn', data: {confirm: 'Are you sure you want to save these changes?'}

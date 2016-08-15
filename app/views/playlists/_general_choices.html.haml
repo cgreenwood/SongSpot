@@ -1,0 +1,16 @@
+%p
+  %strong= label_tag(:limit,"Number of tracks:")
+%p This is the number of songs you want recommended to you. Between 1 and 100.
+%p#limit-value Current Value is : 50
+= range_field_tag(:limit, :in => 1..100, :step => '1')
+%p.pull-left 1
+%p.pull-right 100
+%p
+  %strong= label_tag(:min_pop,"Minimum popularity:")
+%p Number between 1 and 100 where 100 is most popular. A higher number will give you songs more people listen to on Spotify. Although higher numbers may give you less songs than you request.
+%p#pop-value Current Value is : 50
+= range_field_tag(:min_pop, :in => 1..100, :step => '1')
+%p.pull-left Not very popular
+%p.pull-right Very popular
+= hidden_field_tag(:playlist_type,'songs')
+= hidden_field_tag(:market,"GB")

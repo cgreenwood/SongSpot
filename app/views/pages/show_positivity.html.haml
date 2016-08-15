@@ -1,0 +1,10 @@
+- provide(:title, 'Positivity Rankings')
+.container
+  .center.jumbotron.dark
+    %h1 Positivity
+    - if current_user && current_user.positivity_score?
+      %h3 Your Positivity Score: #{(current_user.positivity_score * 100).round(2)}/100
+  = render 'positivity_table'
+  .center.jumbotron.dark
+    - if current_user && current_user.admin?
+      = button_to 'Send to Slack', slack_path,{ method: :get, class: 'btn btn-primary green-btn'}

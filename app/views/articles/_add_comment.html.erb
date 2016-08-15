@@ -1,7 +1,0 @@
-<div class='center jumbotron dark'>
-  <h2 class='pull-left'>Add a comment</h2>
-  <%= form_for([@article, @article.comments.build]) do |f| %>
-    <p><%= f.text_area :body, {class: 'grey-text-area', rows: '3'} %></p>
-    <%= f.submit %>
-  <% end %>
-</div>

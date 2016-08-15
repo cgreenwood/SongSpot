@@ -1,0 +1,13 @@
+.container
+  .center.jumbotron.dark
+    %h1 New Article
+  .center.jumbotron.dark
+    = form_for :article, url: articles_path do |f|
+      .field
+        %p.pull-left= f.label :title
+        = f.text_field :title, {class: 'grey-text-area'}
+      .field
+        %p.pull-left= f.label :text
+        = f.text_area :text, {class: 'grey-text-area', rows: '10'}
+      = f.submit "Create", class: 'btn btn-primary green-btn',          |
+        data: {confirm: 'Are you sure you want to save these changes?'} |
