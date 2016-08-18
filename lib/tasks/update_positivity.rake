@@ -10,11 +10,15 @@ task :update_positivity => :environment do
       track_ids = track_ids.join(',')
       track_features = User.get_audio_features_of_favourites(track_ids)
       happiness = 0.00
+      track_count = 0
       track_features['audio_features'].each do |a|
-        # Rails.logger.debug "#{a['valence']} => spotify:track:#{a['id']}"
-        happiness += a['valence']
+        if a['valence'].nil?
+          Rails.logger.debug "#{a['valence']} => spotify:track:#{a['id']}"
+          happiness += a['valence']
+          track_count += 1
+        end
       end
-      positivity = happiness / 50
+      positivity = happiness / track_count
       u.positivity_score = positivity
       u.save
     end
