@@ -26,8 +26,10 @@ class PagesController < ApplicationController
   end
 
   def show_positivity
-    @users = User.all.select { |u| u.positivity_score }
-    @users = @users.sort_by { |u| u.positivity_score.to_i }.reverse
+    #@users = User.all.select { |u| u.positivity_score }
+    @users = User.where.not(positivity_score: nil)
+    @users = @users.where.not(positivity_score: 'NaN')
+    @users = @users.sort_by { |u| u.positivity_score }.reverse
   end
 
   def callback
