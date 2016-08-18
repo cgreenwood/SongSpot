@@ -12,7 +12,7 @@ task :update_positivity => :environment do
       happiness = 0.00
       track_count = 0
       track_features['audio_features'].each do |a|
-        if a['valence'].nil?
+        unless a.nil?
           Rails.logger.debug "#{a['valence']} => spotify:track:#{a['id']}"
           happiness += a['valence']
           track_count += 1
