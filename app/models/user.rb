@@ -94,6 +94,7 @@ class User < ApplicationRecord
               happiness += a['valence']
               track_count += 1
             end
+          end
         end
         if track_count > 0
           positivity = happiness / track_count
