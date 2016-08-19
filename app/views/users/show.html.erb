@@ -17,7 +17,7 @@
         <%= form_tag(display_playlist_path) do |f| %>
         <%= hidden_field_tag(:playlist_type, 'favourites') %>
         <%= submit_tag 'Click me to listen to your favourites!*', class: 'btn btn-primary green-btn' %>
-        <p><small>* Will open a new page</small></p>
+        <p><small>* Will open a new page in your current tab.</small></p>
         <% end %>
       </div>
       <table class="table">
