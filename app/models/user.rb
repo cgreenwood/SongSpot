@@ -27,7 +27,7 @@ class User < ApplicationRecord
     users.each do |u|
       if (u.name == "Carl Greenwood" || u.name == "Jamie Cleare" ||
           u.name == "Will Stokely" || u.name == "adam" || u.name == "Kevin Hughes" ||
-          u.name == "alex")
+          u.name == "alex" || u.name == "Paul Vaughan")
           ciab_users << u
         end
       end
