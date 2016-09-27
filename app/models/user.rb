@@ -17,7 +17,7 @@ class User < ApplicationRecord
   def self.select_channels(all_channels)
     channels = []
     all_channels['channels'].each do |c|
-      channels << {'name' => c['name'], 'id' => c['id']}
+      channels << { 'name' => c['name'], 'id' => c['id'] }
     end
     return channels
   end
@@ -29,9 +29,9 @@ class User < ApplicationRecord
           u.name == "Will Stokely" || u.name == "adam" || u.name == "Kevin Hughes" ||
           u.name == "alex" || u.name == "Paul Vaughan")
           ciab_users << u
-        end
       end
-      return ciab_users
+    end
+    return ciab_users
   end
 
   def self.get_movement(user)
