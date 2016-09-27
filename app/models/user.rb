@@ -35,12 +35,16 @@ class User < ApplicationRecord
   end
 
   def self.get_movement(user)
-    if user.positivity_score > user.old_positivity_score
-      return "Up from last week."
-    elsif user.positivity_score < user.old_positivity_score
-      return "Down from last week."
+    if user.old_positivity_score.present?
+      if user.positivity_score > user.old_positivity_score
+        return "Up from last week."
+      elsif user.positivity_score < user.old_positivity_score
+        return "Down from last week."
+      else
+        return "Same as last week."
+      end
     else
-      return "Same as last week."
+      return "No idea how happy you were last week."
     end
   end
 
